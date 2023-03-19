@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AD FUTURE ARCHITECTURE COMPANY LIMITED</title>
+    <link rel="icon" type="image/png" href="/assets/logo/logo.png">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+    <!-- Animation -->
+    <link rel="stylesheet" href="/assets/plugins/animate-css/animate.css">
+    <!-- slick Carousel -->
+    <link rel="stylesheet" href="/assets/plugins/slick/slick.css">
+    <link rel="stylesheet" href="/assets/plugins/slick/slick-theme.css">
+    <!-- Colorbox -->
+    <link rel="stylesheet" href="/assets/plugins/colorbox/colorbox.css">
+    <!-- Template styles-->
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/plugins/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/assets/plugins/aos/aos.css" rel="stylesheet">
+    <link href="/assets/plugins/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/plugins/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template styles-->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- initialize jQuery Library -->
+    <script src="/assets/plugins/jQuery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <img class="loading" src="/assets/logo/logo.png" alt="">
+    </div>
+    <div class="body-inner">
+        <%- include('../partials/header.ejs') %>
+
+            <%- body %>
+
+                <%- include('../partials/footer.ejs') %>
+    </div>
+
+    <!-- Bootstrap jQuery -->
+    <script src="/assets/plugins/bootstrap/bootstrap.min.js" defer></script>
+    <!-- Slick Carousel -->
+    <script src="/assets/plugins/slick/slick.min.js"></script>
+    <script src="/assets/plugins/slick/slick-animation.min.js"></script>
+    <!-- Color box -->
+    <script src="/assets/plugins/colorbox/jquery.colorbox.js"></script>
+    <!-- shuffle -->
+    <script src="/assets/plugins/shuffle/shuffle.min.js" defer></script>
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/plugins/aos/aos.js"></script>
+    <script src="/assets/plugins/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/plugins/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/plugins/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/plugins/purecounter/purecounter_vanilla.js"></script>
+    <script src="/assets/plugins/google-map/map.js" defer></script>
+    <!-- Template custom -->
+    <script src="/assets/js/script.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var aboveHeight = $('#sub-header').outerHeight()
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > aboveHeight) {
+                    $('sticknav').addClass('fixed').css('top', '0').next().css('padding-top', '60px');
+                } else {
+                    $('sticknav').removeClass('fixed').next().css('padding-top', '0');
+                }
+            });
+        });
+    </script>
+    </div><!-- Body inner end -->
+</body>
+
+</html>

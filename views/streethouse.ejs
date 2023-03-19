@@ -1,0 +1,117 @@
+<section id="project-area" class="project-area solid-bg">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <h2 class="section-title">Dự án thực hiện bởi</h2>
+                <h3 class="section-sub-title">AD Future</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="shuffle-btn-group">
+                    <label  for="all" id="all">
+                        <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Nhà phố
+                    </label>
+                    <label for="bietthu" id="np2t">
+                        <input type="radio" name="shuffle-filter" id="np2t" value="bt1t">Nhà phố 2 tầng
+                    </label>
+                    <label for="chungcu" id="np3t">
+                        <input type="radio" name="shuffle-filter" id="np3t" value="bt2t">Nhà phố 3 tầng
+                    </label>
+                    <label for="nhapho" id="np4t">
+                        <input type="radio" name="shuffle-filter" id="np4t" value="bt3t">Nhà phố 4 tầng
+                    </label>
+                  
+                </div><!-- project filter end -->
+        
+        
+                <div class="row shuffle-wrapper">
+                   
+                </div><!-- shuffle end -->
+            </div>
+           
+        </div>
+        
+    </div>
+    <!--/ Container end -->
+</section><!-- Project area end -->
+
+<script>
+(async () => {
+    let type = "<%= type %>";
+    function getData(url) {
+            return $.ajax({
+                url: url,
+                type: 'GET',
+            });
+        };
+    let dataHomePage = await getData(`/api/streethouse/${type}`)
+
+    if (dataHomePage && dataHomePage.data) {
+        let html = ''
+        dataHomePage.data.forEach(data => {
+            html += `
+                    <div class="col-lg-4 col-md-6 shuffle-item">
+                        <div class="project-img-container">
+                            <a class="gallery-popup" href="${data.img}" aria-label="project-img">
+                                <img class="img-fluid" src="${data.img}" alt="project-img">
+                                <span class="gallery-icon"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="project-item-info">
+                                <div class="project-item-info-content">
+                                    <h3 class="project-item-title">
+                                        <a href="projects-single.html">${data.title}</a>
+                                    </h3>
+                                    <p class="project-cat">${data.site}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+        })
+        $('.shuffle-wrapper').html(html)
+    }
+        
+    $(`#${type}`).addClass('active');
+    $('.shuffle-btn-group label').on('click', async function () {
+            $('.shuffle-btn-group label').removeClass('active');
+            $(this).addClass('active');
+            type = $(this).attr('id');
+
+            dataHomePage = await getData(`/api/streethouse/${type}`)
+            if (dataHomePage && dataHomePage.data) {
+                let html = ''
+                dataHomePage.data.forEach(data => {
+                    html += `
+                            <div class="col-lg-4 col-md-6 shuffle-item">
+                                <div class="project-img-container">
+                                    <a class="gallery-popup" href="${data.img}" aria-label="project-img">
+                                        <img class="img-fluid" src="${data.img}" alt="project-img">
+                                        <span class="gallery-icon"><i class="fa fa-plus"></i></span>
+                                    </a>
+                                    <div class="project-item-info">
+                                        <div class="project-item-info-content">
+                                            <h3 class="project-item-title">
+                                                <a href="projects-single.html">${data.title}</a>
+                                            </h3>
+                                            <p class="project-cat">${data.site}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                })
+                $('.shuffle-wrapper').html(html)
+        }
+    });
+
+})() 
+</script>
+
+<style>
+    .img-fluid{
+        width:100%;
+        height:320px;
+    }
+</style>
