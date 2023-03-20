@@ -45,4 +45,12 @@ router.get('/', function (req, res) {
     res.render('index', { layout: 'layouts/index' });
 });
 
+router.get('/admin/login', function (req, res) {
+    res.render('admin/login',{ layout: 'layouts/login'})
+})
+
+router.get('/admin/dashboard', function (req, res) {
+    res.render('admin/dashboard',{ layout: 'layouts/dashboard'})
+})
+
 module.exports = router

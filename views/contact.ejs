@@ -121,7 +121,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input class="form-control form-control-subject" name="subject" id="subject"
+                                <input class="form-control form-control-subject" name="phone" id="phone"
                                     placeholder="Số điện thoại" required>
                             </div>
                         </div>
@@ -132,10 +132,22 @@
                             placeholder="Dự án hoặc nhu cầu" rows="6" required></textarea>
                     </div>
                     <div class="text-center"><br>
-                        <button class="btn btn-primary solid blank" type="submit">Gửi thông tin</button>
+                        <button class="btn btn-primary solid blank" id="SendData">Gửi thông tin</button>
                     </div>
                 </form>
             </div>
         </div><!-- Content row -->
     </div><!-- Conatiner end -->
 </section><!-- Main container end -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+<script>
+  const formData = new FormData();
+  $('#SendData').on('click', async function () {
+     formData.append("name", $('#name').val());
+     formData.append("email", $('#email').val());
+     formData.append("phone", $('#phone').val());
+     formData.append("message", $('#message').val());
+     formData.get("email")
+     console.log(formData.get("email"));
+  })
+</script>

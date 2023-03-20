@@ -1,0 +1,37 @@
+
+[2023-03-20T15:01:25.599] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T15:01:25.609] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:01:54.868] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:01:54.876] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:03:04.143] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:03:04.147] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:05:55.739] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:05:55.743] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:06:16.124] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:06:16.127] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:22:49.250] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:22:49.284] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:26:20.102] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:26:20.110] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:28:56.645] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:28:56.649] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:34:46.196] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:34:46.201] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:35:55.079] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:35:55.083] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:36:52.573] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:36:52.576] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:43:39.438] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:43:39.443] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:43:51.902] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:43:51.905] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:44:10.568] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:44:10.572] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:45:48.625] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:45:48.628] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:49:24.902] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:49:24.908] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:53:29.535] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:53:29.538] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-20T22:54:28.394] [DEBUG] default - Connected to mongoDB.
+[2023-03-20T22:54:28.399] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority

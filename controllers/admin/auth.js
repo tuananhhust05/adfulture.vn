@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const {CreateError} = require('../../utils/error');
 const jwt = require('jsonwebtoken')
 const UserAdmin = require('../.././models/UserAdmin.js');
 const {takeTokenPassJwt} = require('../../utils/takeTokenPassJwt');
@@ -59,8 +60,8 @@ const checkTokenLimitReq = (token) => {
 
 async function Login(req,res){
     try{
-       if(req.body.token && req.body.password && req.body.userName){
-          if(checkTokenLimitReq(req.params.token)){
+       if(req.body.password && req.body.userName){
+          if(checkTokenLimitReq(req.ip)){
               const userCheck = await UserAdmin.findOne({userName:req.body.userName});
               if(userCheck){
                 const isPasswordCorrect = await bcrypt.compare(
