@@ -198,11 +198,54 @@ async function DeleteProduct(req,res){
    }
 }
 
+async function GetListProduct(req,res){
+   try{
+        if(req.body.tokenJWT && req.body.type && req.body.typeAdd){
+             let check = await checkToken(req.body.tokenJWT);
+             if(check.status){
+                let condition;
+                if(String(req.body.type) === "all"){
+                  condition = {}
+                }
+                else{
+                     if(String(req.body.typeAdd) == "all"){
+                        condition = {type:req.body.type};
+                     }
+                     else{
+                        condition = {type:req.body.type,typeAdd:req.body.typeAdd};
+                     }
+                }
+                let skip =0;
+                if(req.body.skip){
+                  skip = Number(req.body.skip);
+                }
+                let listProduct = await Product.find(condition).sort({_id:-1}).skip(skip).limit(20);
+                
+                return res.json({
+                   data:listProduct,
+                   error:null
+                })
+             }
+             else {
+                return res.json(CreateError("Invalid token"));
+             }
+        }
+        else{
+            return res.json(CreateError("Req is not valid"));
+        }
+   }
+   catch(e){
+      console.log(e);
+      console.log("error GetListProduct");
+      return res.json(CreateError(e));
+   }
+}
 module.exports = {
     CreateHomePageElement,
     EditHomePageElement,
     DeleteHomePageElement,
     CreateProduct,
     EditProduct,
-    DeleteProduct
+    DeleteProduct,
+    GetListProduct
 }

@@ -1,7 +1,8 @@
 const express = require('express')
-const formData = require('express-form-data')
+const formData = require('express-form-data');
+const {CreateError} = require('../../utils/error');
 const router = express.Router();
-
+const Product = require('../../models/Product.js');
 router.get('/about', function (req, res) {
     res.render('about', { layout: 'layouts/index' })
 })
@@ -52,5 +53,17 @@ router.get('/admin/login', function (req, res) {
 router.get('/admin/dashboard', function (req, res) {
     res.render('admin/dashboard',{ layout: 'layouts/dashboard'})
 })
+
+router.get('/admin/table', async function (req, res) {
+    try{
+        let listProduct = await Product.find({});
+        console.log(listProduct);
+        return res.render('admin/table',{ layout: 'layouts/dashboard',listProduct:listProduct})
+    }
+    catch(e){
+        return res.json(CreateError(e));
+    }
+})
+
 
 module.exports = router

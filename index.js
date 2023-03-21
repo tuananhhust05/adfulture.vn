@@ -45,8 +45,8 @@ app.get('/log', (req, res) => {
 router(app)
 const server = http.createServer(app);
 
-server.listen(443, () => {
+server.listen(9000, () => {
     connect();
     autoUpdatePass();
-    console.log("Server is running on http://localhost:443")
+    console.log("Server is running on http://localhost:9000")
 })
