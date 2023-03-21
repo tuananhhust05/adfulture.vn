@@ -32,6 +32,41 @@
 </head>
 
 <body>
+    <a class="phone-wrapper" href="tel:0981596888">
+        <button class="phone-button animated pulse" aria-label="Liên hệ">
+            <i class="fas fa-phone-alt"></i>
+        </button>
+    </a>
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "103627701932649");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v16.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div id="loader">
         <div class="ring"></div>
         <div class="ring"></div>
@@ -66,6 +101,15 @@
     <script src="/assets/js/script.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            // Kiểm tra xem người dùng truy cập trang web bằng thiết bị di động hay không
+            function isMobile() {
+                return /Mobi/.test(navigator.userAgent);
+            }
+            //Nếu mà máy tính bỏ button sdt
+            if (isMobile()) {
+                $('.phone-wrapper').css('display', 'inline-block')
+            }
+
             var aboveHeight = $('#sub-header').outerHeight()
             $(window).scroll(function () {
                 if ($(window).scrollTop() > aboveHeight) {

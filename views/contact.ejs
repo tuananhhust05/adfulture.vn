@@ -101,7 +101,7 @@
                 <h3 class="column-title">Đăng ký tư vấn, Nhận báo giá</h3>
                 <!-- contact form works with formspree.io  -->
                 <!-- contact form activation doc: https://docs.themefisher.com/constra/contact-form/ -->
-                <form id="contact-form" action="#" method="post" role="form">
+                <form id="contact-form">
                     <div class="error-container"></div>
                     <div class="row">
                         <div class="col-md-4">
@@ -139,15 +139,52 @@
         </div><!-- Content row -->
     </div><!-- Conatiner end -->
 </section><!-- Main container end -->
+
+<div id="notification" class="hidden">
+    <div class="notification-content">
+        Gửi thông tin thành công!
+    </div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
 <script>
-  const formData = new FormData();
-  $('#SendData').on('click', async function () {
-     formData.append("name", $('#name').val());
-     formData.append("email", $('#email').val());
-     formData.append("phone", $('#phone').val());
-     formData.append("message", $('#message').val());
-     formData.get("email")
-     console.log(formData.get("email"));
-  })
+    const formData = new FormData();
+    $('form').submit(function (e) {
+        e.preventDefault()
+        formData.append("name", $('#name').val());
+        formData.append("email", $('#email').val());
+        // formData.append("phone", $('#phone').val());
+        // formData.append("message", $('#message').val());
+        $.ajax({
+            type: "POST",
+            url: "/api/sendMail",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                // Hiển thị thông báo thành công
+                $('#notification').addClass('show')
+                // Tự động ẩn thông báo sau 3 giây
+                setTimeout(function () {
+                    $('#notification').removeClass('show')
+                }, 2000);
+            },
+            error: function (xhr, status, error) {
+                $('.notification-content').text('Gửi thông tin thất bại')
+                $('#notification').css('background-color', '#f44336')
+                $('#notification').addClass('show')
+                // Tự động ẩn thông báo sau 3 giây
+                setTimeout(function () {
+                    $('#notification').removeClass('show')
+                }, 2000);
+            }
+        })
+
+        $('#name').val('')
+        $('#message').val('')
+        $('#email').val('')
+        $('#phone').val('')
+    })
 </script>
