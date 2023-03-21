@@ -45,7 +45,7 @@
                         <div data-animation-in="slideInLeft">
                             <a href="about.html" class="slider btn btn-primary" aria-label="contact-with-us">Dịch vụ AD
                                 Future</a>
-                            <a href="contact.html" class="slider btn btn-primary border"
+                            <a href="/contact" class="slider btn btn-primary border"
                                 aria-label="learn-more-about-us">Liên hệ với AD Future</a>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                 </div><!-- Col end -->
                 <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
                     <div class="call-to-action-btn">
-                        <a class="btn btn-dark" href="contact.html">Liên hệ với AD Future</a>
+                        <a class="btn btn-dark" href="/contact">Liên hệ với AD Future</a>
                     </div>
                 </div><!-- col end -->
             </div><!-- row end -->
@@ -558,14 +558,14 @@
 
             $('.shuffle-btn-group label').on('click', function () {
                 $('.shuffle-btn-group label').removeClass('active');
-                    $(this).addClass('active');
-                    const id = $(this).attr('id');
-                    category = id;
-                    html = '';
-                    mode = 'short_list';
-                    $('#see_all').html(`Xem tất cả dự án`);
-                    dataHomePage.data[id].forEach(data => {
-                        html += `
+                $(this).addClass('active');
+                const id = $(this).attr('id');
+                category = id;
+                html = '';
+                mode = 'short_list';
+                $('#see_all').html(`Xem tất cả dự án`);
+                dataHomePage.data[id].forEach(data => {
+                    html += `
                             <div class="col-lg-4 col-md-6 shuffle-item">
                                 <div class="project-img-container">
                                     <a class="gallery-popup" href="${data.img}" aria-label="project-img">
@@ -583,32 +583,32 @@
                                 </div>
                             </div>
                         `
-                    })
-                    $('.shuffle-wrapper').html(html)
+                })
+                $('.shuffle-wrapper').html(html)
             });
         }
-        
-        $('#see_all').on('click', async function(){
+
+        $('#see_all').on('click', async function () {
             let urlCallApi = '';
             let type = category;
 
-            if(category == 'buildinghome'){
+            if (category == 'buildinghome') {
                 type = 'building-home';
             }
-            else if(category == 'gardenhouse'){
+            else if (category == 'gardenhouse') {
                 type = 'garden-house'
             }
-            else if(category == 'smallhouse4'){
+            else if (category == 'smallhouse4') {
                 type = 'small-house4'
             }
-            
-            if(String(mode) == 'short_list'){
+
+            if (String(mode) == 'short_list') {
                 mode = 'long_list';
                 $('#see_all').html(`Danh sách rút gọn`)
-              
+
                 urlCallApi = `/api/homepage/GetProductByType/${type}`;
                 let DataRender = await getData(urlCallApi);
-                if(DataRender && DataRender.data){
+                if (DataRender && DataRender.data) {
                     let html = ''
                     DataRender.data.forEach(data => {
                         html += `
@@ -632,13 +632,13 @@
                     })
                     $('.shuffle-wrapper').html(html)
                 }
-            
+
             }
-            else if(String(mode) == 'long_list'){
+            else if (String(mode) == 'long_list') {
                 mode = 'short_list';
                 $('#see_all').html(`Xem tất cả dự án`)
-                  urlCallApi = '/api/homepage/GetDataHomePage';
-                html = ''; 
+                urlCallApi = '/api/homepage/GetDataHomePage';
+                html = '';
                 dataHomePage.data[category].forEach(data => {
                     html += `
                         <div class="col-lg-4 col-md-6 shuffle-item">
@@ -661,15 +661,20 @@
                 })
                 $('.shuffle-wrapper').html(html);
             }
-        
+
         })
         // $('#loader').css('display', 'none')
     })() 
 </script>
 
 <style>
-    .img-fluid{
-        width:100%;
-        height:320px;
+    .shuffle-item .img-fluid {
+        width: 100%;
+        height: 320px;
+    }
+
+    .all-clients img {
+        height: 12vh;
+        width: auto;
     }
 </style>

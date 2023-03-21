@@ -3575,3 +3575,126 @@ label {
     transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
   }
 }
+
+#notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #4DB6AC;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #999;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(100%);
+  z-index: 999999;
+}
+
+#notification.show {
+  display: block;
+  transform: translateX(0);
+}
+
+.notification-content {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Thêm CSS cho màn hình có độ rộng nhỏ hơn 768px */
+@media (max-width: 767px) {
+  #notification {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: 90%;
+  }
+}
+
+
+
+.phone-wrapper {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 999999;
+}
+
+.phone-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #008CBA;
+  color: #fff;
+  font-size: 24px;
+  border: none;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  animation: shake 2s infinite;
+}
+
+.phone-button:hover {
+  background-color: #00678E;
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(10deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}

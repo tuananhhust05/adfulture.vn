@@ -71,7 +71,7 @@ jQuery(function ($) {
                 scrollToTop.fadeOut();
             }
         }
-        scrollTopBtn();
+        // scrollTopBtn();
     });
 
 
@@ -114,7 +114,7 @@ jQuery(function ($) {
                 return false;
             });
         }
-        backToTop();
+        // backToTop();
 
 
         // banner-carousel
