@@ -91,3 +91,5 @@
 [2023-03-21T11:29:07.801] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
 [2023-03-21T12:46:52.918] [DEBUG] default - Connected to mongoDB.
 [2023-03-21T12:46:52.934] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
+[2023-03-22T00:10:08.214] [DEBUG] default - Connected to mongoDB.
+[2023-03-22T00:10:08.225] [DEBUG] default - mongodb+srv://Tuananhhust05:Tuananh050901@cluster0.aqpat.mongodb.net/AdFulture?retryWrites=true&w=majority
