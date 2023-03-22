@@ -331,6 +331,7 @@
                             </td>
                             <td>
                                 <img className="img_product" style="height:40px;width:40px;border-radius:3px" 
+                                     id="${res.data.data[i]._id}img"
                                      src="${res.data.data[i].img[0]}" alt="img${res.data.data[i]._id}"/>
                             </td>
                             <td>
@@ -411,8 +412,8 @@
             fd.append('tokenJWT',tokenJWT)
             axios.post(`/api/admin/file/upload/product`,fd, config)
                 .then(response => {
-                    console.log(response.data);
                     if (response && response.data && response.data.data) {
+                        $(`#${id}img`).attr("src", response.data.data);
                         console.log(response.data.data);
                     }
             }).catch((e)=>{console.log(e)});
