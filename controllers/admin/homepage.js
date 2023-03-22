@@ -135,7 +135,7 @@ async function CreateProduct(req,res){
 
 async function EditProduct(req,res){
    try{
-        if(req.body.site && req.body.title && req.body.type && req.body.img  && req.body.tokenJWT && req.body._id && req.body.typeAdd){
+        if(req.body.site && req.body.title && req.body.type  && req.body.tokenJWT && req.body._id && req.body.typeAdd){
              let check = await checkToken(req.body.tokenJWT);
              if(check.status){
                 Product.updateOne(
@@ -143,7 +143,6 @@ async function EditProduct(req,res){
                   {
                      $set:{
                         site: req.body.site,
-                        img:[req.body.img],
                         title: req.body.title,
                         type:req.body.type,
                         typeAdd:req.body.typeAdd
@@ -156,10 +155,12 @@ async function EditProduct(req,res){
                 })
              }
              else {
+                console.log('Invalid token')
                 return res.json(CreateError("Invalid token"));
              }
         }
         else{
+            console.log('Req is not valid')
             return res.json(CreateError("Req is not valid"));
         }
    }

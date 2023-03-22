@@ -64,11 +64,10 @@ router.get('/admin/dashboard', function (req, res) {
 
 router.get('/admin/table', async function (req, res) {
     try {
-        let listProduct = await Product.find({});
-        console.log(listProduct);
-        return res.render('admin/table', { layout: 'layouts/dashboard', listProduct: listProduct })
+        return res.render('admin/table', { layout: 'layouts/dashboard'})
     }
     catch (e) {
+
         return res.json(CreateError(e));
     }
 })

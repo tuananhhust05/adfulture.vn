@@ -11,8 +11,7 @@ async function editPrice(req, res) {
                 const tkkt = req.body.tkkt
                 const tktg = req.body.tktg
                 let str = fs.readFileSync('utils/pricing.txt', 'utf8')
-                const obj = str.trim() ? JSON.parse(str) : {}
-                console.log(obj[tkkt])
+                const obj = str.trim() ? JSON.parse(str) : {};
                 if (tknt) obj.tknt = Number(tknt).toLocaleString('en-US').replaceAll(',', '.')
                 if (tkkt) obj.tkkt = Number(tkkt).toLocaleString('en-US').replaceAll(',', '.')
                 if (tktg) obj.tktg = Number(tktg).toLocaleString('en-US').replaceAll(',', '.')
