@@ -1,6 +1,7 @@
 const express = require('express')
 const formData = require('express-form-data');
-const {CreateError} = require('../../utils/error');
+const fs = require('fs')
+const { CreateError } = require('../../utils/error');
 const router = express.Router();
 const Product = require('../../models/Product.js');
 router.get('/about', function (req, res) {
@@ -8,11 +9,11 @@ router.get('/about', function (req, res) {
 })
 
 router.get('/villa/:type', function (req, res) {
-    res.render('villa', { layout: 'layouts/index' ,type:req.params.type})
+    res.render('villa', { layout: 'layouts/index', type: req.params.type })
 })
 
 router.get('/streethouse/:type', function (req, res) {
-    res.render('streethouse', { layout: 'layouts/index' ,type:req.params.type})
+    res.render('streethouse', { layout: 'layouts/index', type: req.params.type })
 })
 
 router.get('/services', function (req, res) {
@@ -39,7 +40,14 @@ router.get('/project-detail/:id', function (req, res) {
 })
 
 router.get('/pricing', function (req, res) {
-    res.render('pricing', { layout: 'layouts/index' })
+    const a = {
+        tkkt: '200.000',
+        tknt: '200.000',
+        tktg: '250.000',
+    }
+    // fs.writeFileSync('./utils/pricing.txt', JSON.stringify(a))
+    const price = JSON.parse(fs.readFileSync('./utils/pricing.txt', 'utf8'))
+    res.render('pricing', { layout: 'layouts/index', price: price })
 })
 
 router.get('/', function (req, res) {
@@ -47,20 +55,20 @@ router.get('/', function (req, res) {
 });
 
 router.get('/admin/login', function (req, res) {
-    res.render('admin/login',{ layout: 'layouts/login'})
+    res.render('admin/login', { layout: 'layouts/login' })
 })
 
 router.get('/admin/dashboard', function (req, res) {
-    res.render('admin/dashboard',{ layout: 'layouts/dashboard'})
+    res.render('admin/dashboard', { layout: 'layouts/dashboard' })
 })
 
 router.get('/admin/table', async function (req, res) {
-    try{
+    try {
         let listProduct = await Product.find({});
         console.log(listProduct);
-        return res.render('admin/table',{ layout: 'layouts/dashboard',listProduct:listProduct})
+        return res.render('admin/table', { layout: 'layouts/dashboard', listProduct: listProduct })
     }
-    catch(e){
+    catch (e) {
         return res.json(CreateError(e));
     }
 })

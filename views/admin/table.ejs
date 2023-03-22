@@ -313,7 +313,7 @@
                     $('#selecform_typeAdd').append(`
                         <option value="bt1t">bt1t</option>
                         <option value="bt2t">bt2t</option>
-                        <option value="bt4t">bt4t</option>
+                        <option value="bt3t">bt3t</option>
                     `);
                 }
                 else{
@@ -332,6 +332,7 @@
     const handleChangeTypeAdd = async (value)=>{
         try{
             typeAdd = value;
+            console.log(type,typeAdd);
             if( array_check.find((e=> String(e.type) === String(type) )) ){
                 if( array_check.find((e=> String(e.type) === String(type) )).typeAddArr.find((e)=> String(e) === String(typeAdd)) ){
                     takeDataTable();

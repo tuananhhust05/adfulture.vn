@@ -154,33 +154,34 @@
         e.preventDefault()
         formData.append("name", $('#name').val());
         formData.append("email", $('#email').val());
-        // formData.append("phone", $('#phone').val());
-        // formData.append("message", $('#message').val());
+        formData.append("phone", $('#phone').val());
+        formData.append("message", $('#message').val());
         $.ajax({
             type: "POST",
             url: "/api/sendMail",
             processData: false,
             contentType: false,
             data: formData,
-            success: function (response) {
-                console.log(response);
-                // Hiển thị thông báo thành công
-                $('#notification').addClass('show')
-                // Tự động ẩn thông báo sau 3 giây
-                setTimeout(function () {
-                    $('#notification').removeClass('show')
-                }, 2000);
-            },
-            error: function (xhr, status, error) {
-                $('.notification-content').text('Gửi thông tin thất bại')
-                $('#notification').css('background-color', '#f44336')
-                $('#notification').addClass('show')
-                // Tự động ẩn thông báo sau 3 giây
-                setTimeout(function () {
-                    $('#notification').removeClass('show')
-                }, 2000);
-            }
         })
+        $.ajax({
+            type: "POST",
+            url: "/api/contact/createCustomer",
+            processData: false,
+            contentType: false,
+            data: formData,
+        })
+        // Hiển thị thông báo thành công
+        $('#notification').addClass('show')
+        setTimeout(function () {
+            $('#notification').removeClass('show')
+        }, 3000);
+        // Hiển thị thông báo thất bại
+        // $('.notification-content').text('Gửi thông tin thất bại')
+        // $('#notification').css('background-color', '#f44336')
+        // $('#notification').addClass('show')
+        // setTimeout(function () {
+        //     $('#notification').removeClass('show')
+        // }, 2000);
 
         $('#name').val('')
         $('#message').val('')
