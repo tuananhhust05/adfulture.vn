@@ -17,6 +17,10 @@ const CustomerSchema = new mongoose.Schema(
             type: String,
             default: ""
         },
+        read:{
+            type:Number,
+            default:0
+        }
     },
     {
         collection: 'Customers',

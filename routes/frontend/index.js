@@ -40,16 +40,10 @@ router.get('/project-detail/:id', function (req, res) {
 })
 
 router.get('/pricing', function (req, res) {
-    const a = {
-        tkkt: '200.000',
-        tknt: '200.000',
-        tktg: '250.000',
-    }
     // fs.writeFileSync('./utils/pricing.txt', JSON.stringify(a))
     const price = JSON.parse(fs.readFileSync('./utils/pricing.txt', 'utf8'))
     res.render('pricing', { layout: 'layouts/index', price: price })
 })
-
 router.get('/', function (req, res) {
     res.render('index', { layout: 'layouts/index' });
 });
@@ -76,5 +70,12 @@ router.get('/admin/table', async function (req, res) {
     }
 })
 
+router.get('/admin/editprice', function (req, res) {
+    res.render('admin/editprice', { layout: 'layouts/dashboard' })
+})
+
+router.get('/admin/listRequestCustomer', function (req, res) {
+    res.render('admin/listRequestCustomer', { layout: 'layouts/dashboard' })
+}) 
 
 module.exports = router

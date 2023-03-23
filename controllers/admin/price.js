@@ -12,9 +12,9 @@ async function editPrice(req, res) {
                 const tktg = req.body.tktg
                 let str = fs.readFileSync('utils/pricing.txt', 'utf8')
                 const obj = str.trim() ? JSON.parse(str) : {};
-                if (tknt) obj.tknt = Number(tknt).toLocaleString('en-US').replaceAll(',', '.')
-                if (tkkt) obj.tkkt = Number(tkkt).toLocaleString('en-US').replaceAll(',', '.')
-                if (tktg) obj.tktg = Number(tktg).toLocaleString('en-US').replaceAll(',', '.')
+                if (tknt) obj.tknt = String(tknt).toLocaleString('en-US')
+                if (tkkt) obj.tkkt = String(tkkt).toLocaleString('en-US')
+                if (tktg) obj.tktg = String(tktg).toLocaleString('en-US')
                 const value = JSON.stringify(obj)
                 fs.writeFileSync('utils/pricing.txt', value)
                 return res.json({
@@ -37,4 +37,21 @@ async function editPrice(req, res) {
     }
 }
 
-module.exports = { editPrice }
+async function getPrice(req, res) {
+    try {
+        const resultBuffer = fs.readFileSync('utils/pricing.txt');
+        const resultData = JSON.parse(resultBuffer.toString().trim());
+        res.json({
+            data: resultData
+        })
+    }
+    catch (e) {
+        console.log(e);
+        console.log("error getPrice");
+        return res.json(CreateError(e));
+    }
+}
+
+
+
+module.exports = { editPrice, getPrice }
