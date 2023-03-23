@@ -6,18 +6,18 @@ const {CreateError} = require('../.././utils/error');
 
 async function CreateHomePageElement(req,res){
    try{
-        if(req.body.site && req.body.title && req.body.type && req.body.img  && req.body.tokenJWT){
+        if(req.body.site && req.body.title && req.body.type  && req.body.tokenJWT){
              let check = await checkToken(req.body.tokenJWT);
              if(check.status){
                 let newProductHompage = new ProductHomepage({
                     site: req.body.site,
                     title: req.body.title,
                     type: req.body.type,
-                    img:[req.body.img]
+                    img:['']
                 });
-                newProductHompage.save().catch((e)=>{console.log("Error newProductHompage CreateHomePageElement"); console.log(e)})
+                let savedProductPage = await newProductHompage.save();
                 return res.json({
-                   data: newProductHompage,
+                   data: savedProductPage,
                    error:null
                 })
              }

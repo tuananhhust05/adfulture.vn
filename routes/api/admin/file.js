@@ -5,6 +5,7 @@ const router= express.Router();
 
 const {
   UpoadImgProduct,
+  UpoadImgHomePageProduct
 } = require('../../../controllers/admin/file');
 
 let storage = multer.diskStorage({
@@ -17,5 +18,5 @@ let storage = multer.diskStorage({
   })
 const upload = multer({ storage: storage });
 router.post("/upload/product",upload.any("files"),UpoadImgProduct);
-
+router.post("/upload/homepageproduct",upload.any("files"),UpoadImgHomePageProduct);
 module.exports=router;

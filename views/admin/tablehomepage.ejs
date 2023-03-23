@@ -14,19 +14,19 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="/admin/dashboard">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
+                <li class="active">
+                    <a href="/admin/tablehomepage">
+                        <i class="pe-7s-note2"></i>
+                        <p>Bảng tổng hợp sản phẩm trang chủ</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/admin/table">
                         <i class="pe-7s-note2"></i>
                         <p>Bảng tổng hợp sản phẩm</p>
@@ -227,7 +227,6 @@
             <input type="text" placeholder="type" class="btn btn-primary input_create" id="create_type"/>
             <input type="text" placeholder="title" class="btn btn-primary input_create" id="create_title"/>
             <input type="text" placeholder="site" class="btn btn-primary input_create" id="create_site"/>
-            <input type="text" placeholder="typeAdd" class="btn btn-primary input_create" id="create_typeAdd"/>
             <button class="btn btn-success add_btn_form_creacte" onclick="CreateProduct()" >Thêm</button>
         </div>
     </div>
@@ -342,7 +341,6 @@
     let tokenJWT = localStorage['token'];
     const takeDataTable = async ()=>{
         let res = await axios.get('/api/homepage/GetDataHomePage');
-        console.log(res.data.data.all);
         if(res.data && res.data.data && res.data.data.all){
             $('#data_table_root').html('')
             for(let i=0; i < res.data.data.all.length; i++){
@@ -402,7 +400,7 @@
             fd.append('file', file);
             fd.append('IdProduct',id);
             fd.append('tokenJWT',tokenJWT)
-            axios.post(`/api/admin/file/upload/product`,fd, config)
+            axios.post(`/api/admin/file/upload/homepageproduct`,fd, config)
                 .then(response => {
                     if (response && response.data && response.data.data) {
                         $(`#${id}img`).attr("src", response.data.data);
@@ -480,12 +478,11 @@
         try{
             let res = await axios({
                 method: "post",
-                url: "/api/admin/homepage/CreateProduct",
+                url: "/api/admin/homepage/CreateHomePageElement",
                 data: {
                     site:$(`#create_site`).val(),
                     title:$(`#create_title`).val(),
                     type:$(`#create_type`).val(),
-                    typeAdd:$(`#create_typeAdd`).val(),
                     tokenJWT
                 },
                 headers: { "Content-Type": "multipart/form-data" }
@@ -511,11 +508,6 @@
                                       onchange="ChangeDataProduct('${res.data.data._id}')"
                                       id="${res.data.data._id}type" 
                                       value="${res.data.data.type}" class="btn btn-primary"/>
-                            </td>
-                            <td class="td_product">
-                                <input onchange="ChangeDataProduct('${res.data.data._id}')"
-                                       id="${res.data.data._id}typeAdd"
-                                       value="${res.data.data.typeAdd}" class="btn btn-primary"/>
                             </td>
                             <td class="td_product">
                                 <img className="img_product" style="height:40px;width:40px;border-radius:3px" 
@@ -546,7 +538,7 @@
     const DeleteProduct = async (id)=>{
         axios({
                 method: "post",
-                url: "/api/admin/homepage/DeleteProduct",
+                url: "/api/admin/homepage/DeleteHomePageElement",
                 data: {
                     _id:id,
                     tokenJWT
