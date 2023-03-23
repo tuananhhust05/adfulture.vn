@@ -156,17 +156,6 @@
                                 <h4 class="title">Danh sách sản phẩm</h4>
                                 <p class="category">Bạn có thê chỉnh sửa thông tin hiển thị trên site tại đây</p>
                                 <div class="select_otion">
-                                    <select class="custom-select" onchange="handleChangeType(this.value)">
-                                        <option selected value="all">all</option>
-                                        <option value="streethouse">streethouse</option>
-                                        <option value="garden-house">garden-house</option>
-                                        <option value="building-home">building-home</option>
-                                        <option value="small-house4">small-house4</option>
-                                        <option value="villa">villa</option>
-                                    </select>
-    
-                                    <select class="custom-select" id="selecform_typeAdd" onchange="handleChangeTypeAdd(this.value)">
-                                    </select>
                                     <button class="savechange_btn" onclick="SaveChange()">
                                         Lưu
                                      </button>
@@ -186,7 +175,6 @@
                                         <th>Địa điểm</th>
                                     	<th>Tiêu đề</th>
                                     	<th>Loại sản phẩm</th>
-                                    	<th>Phân khúc</th>
                                     	<th>Hình ảnh</th>
                                     </thead>
                                     <tbody id="data_table_root">
@@ -350,75 +338,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 <script>
-    let type = "all";
-    let typeAdd = 'all';
-    let tokenJWT = localStorage['token'];
-    let array_check = [
-        {
-            type:"streethouse",
-            typeAddArr:['all','np2t','np3t','np4t']
-        },
-        {
-            type:"villa",
-            typeAddArr:['all','bt1t','bt2t','bt3t']
-        }
-    ];
     let arrIdChange = [];
-
-    // hide select form typeAdd
-    $('#selecform_typeAdd').hide();
-    // $('#form_create_product').hide();
+    let tokenJWT = localStorage['token'];
     const takeDataTable = async ()=>{
-        let res = await axios({
-            method: "post",
-            url: "/api/admin/homepage/GetListProduct",
-            data: {
-                type,
-                typeAdd,
-                tokenJWT
-            },
-            headers: { "Content-Type": "multipart/form-data" }
-        })
-        if(res.data && res.data.data){
+        let res = await axios.get('/api/homepage/GetDataHomePage');
+        console.log(res.data.data.all);
+        if(res.data && res.data.data && res.data.data.all){
             $('#data_table_root').html('')
-            for(let i=0; i<res.data.data.length; i++){
+            for(let i=0; i < res.data.data.all.length; i++){
                 $('#data_table_root').append(`
-                        <tr id="${res.data.data[i]._id}">
+                        <tr id="${res.data.data.all[i]._id}">
                             <td class="td_product">
                                 <input type="text" 
-                                       onchange="ChangeDataProduct('${res.data.data[i]._id}')"
-                                       id="${res.data.data[i]._id}site"
-                                       value="${res.data.data[i].site}" 
+                                       onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                       id="${res.data.data.all[i]._id}site"
+                                       value="${res.data.data.all[i].site}" 
                                        class="btn btn-primary"/>
                             </td>
                             <td class="td_product">
                                 <input 
-                                      onchange="ChangeDataProduct('${res.data.data[i]._id}')"
-                                      id="${res.data.data[i]._id}title" 
-                                      value="${res.data.data[i].title}" class="btn btn-primary"/>
+                                      onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                      id="${res.data.data.all[i]._id}title" 
+                                      value="${res.data.data.all[i].title}" class="btn btn-primary"/>
                             </td>
                             <td class="td_product">
                                 <input 
-                                      onchange="ChangeDataProduct('${res.data.data[i]._id}')"
-                                      id="${res.data.data[i]._id}type" 
-                                      value="${res.data.data[i].type}" class="btn btn-primary"/>
-                            </td>
-                            <td class="td_product">
-                                <input onchange="ChangeDataProduct('${res.data.data[i]._id}')"
-                                       id="${res.data.data[i]._id}typeAdd"
-                                       value="${res.data.data[i].typeAdd}" class="btn btn-primary"/>
+                                      onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                      id="${res.data.data.all[i]._id}type" 
+                                      value="${res.data.data.all[i].type}" class="btn btn-primary"/>
                             </td>
                             <td class="td_product">
                                 <img className="img_product" style="height:40px;width:40px;border-radius:3px" 
-                                     id="${res.data.data[i]._id}img"
-                                     src="${res.data.data[i].img[0]}" alt="img${res.data.data[i]._id}"/>
+                                     id="${res.data.data.all[i]._id}img"
+                                     src="${res.data.data.all[i].img[0]}" alt="img${res.data.data.all[i]._id}"/>
                             </td>
                             <td class="td_product">
                                 <div >
-                                    <input onchange="StartUploadFile('${res.data.data[i]._id}')" class="btn btn-primary" type="file" id="file${res.data.data[i]._id}" name="file" />
+                                    <input onchange="StartUploadFile('${res.data.data.all[i]._id}')" class="btn btn-primary" type="file" id="file${res.data.data.all[i]._id}" name="file" />
                                 </div>
                             </td>
-                            <td class="td_product" onclick="DeleteProduct('${res.data.data[i]._id}')">
+                            <td class="td_product" onclick="DeleteProduct('${res.data.data.all[i]._id}')">
                                 <button class="btn btn-danger">
                                     Xóa
                                 </button>
@@ -432,57 +391,6 @@
         }
     }
     takeDataTable();
-
-    const handleChangeType = async (value)=>{
-        try{
-            type = value;
-            typeAdd = 'all'
-            $('#data_table_root').html('');
-            if(String(type) !== "all"){
-                $('#selecform_typeAdd').show();
-                $('#selecform_typeAdd').html('');
-                if(String(type) === "streethouse"){
-                    $('#selecform_typeAdd').append(`
-                        <option value="all">all</option>
-                        <option value="np2t">np2t</option>
-                        <option value="np3t">np3t</option>
-                        <option value="np4t">np4t</option>
-                    `);
-                }
-                else if(String(type) === "villa"){
-                    $('#selecform_typeAdd').append(`
-                        <option value="all">all</option>
-                        <option value="bt1t">bt1t</option>
-                        <option value="bt2t">bt2t</option>
-                        <option value="bt3t">bt3t</option>
-                    `);
-                }
-                else{
-                    $('#selecform_typeAdd').hide();
-                }
-            }else{
-                $('#selecform_typeAdd').hide();
-            }
-            takeDataTable();
-        }
-        catch(e){
-            console.log("handleChangeType",e)
-        }
-    }
-
-    const handleChangeTypeAdd = async (value)=>{
-        try{
-            typeAdd = value;
-            if( array_check.find((e=> String(e.type) === String(type) )) ){
-                if( array_check.find((e=> String(e.type) === String(type) )).typeAddArr.find((e)=> String(e) === String(typeAdd)) ){
-                    takeDataTable();
-                }
-            }
-        }
-        catch(e){
-            console.log("handleChangeTypeAdd",e)
-        }
-    }
 
     const StartUploadFile = async (id)=>{
         try{
@@ -526,12 +434,11 @@
                for(let i=0; i<arrIdChange.length; i++){
                     axios({
                         method: "post",
-                        url: "/api/admin/homepage/EditProduct",
+                        url: "/api/admin/homepage/EditHomePageElement",
                         data: {
                             site:$(`#${arrIdChange[i]}site`).val(),
                             title:$(`#${arrIdChange[i]}title`).val(),
                             type:$(`#${arrIdChange[i]}type`).val(),
-                            typeAdd:$(`#${arrIdChange[i]}typeAdd`).val(),
                             _id:arrIdChange[i],
                             tokenJWT
                         },
@@ -559,6 +466,7 @@
            console.log(e);
         }
     }
+
     const handleCloseFormCreateProduct = ()=>{
         try{
            document.getElementById('form_create_product').style.display = 'none';

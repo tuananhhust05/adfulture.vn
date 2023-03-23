@@ -62,6 +62,10 @@ router.get('/admin/dashboard', function (req, res) {
     res.render('admin/dashboard', { layout: 'layouts/dashboard' })
 })
 
+router.get('/admin/tablehomepage', function (req, res) {
+    res.render('admin/tablehomepage', { layout: 'layouts/dashboard' })
+})
+
 router.get('/admin/table', async function (req, res) {
     try {
         return res.render('admin/table', { layout: 'layouts/dashboard'})

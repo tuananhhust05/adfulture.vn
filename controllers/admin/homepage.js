@@ -38,7 +38,7 @@ async function CreateHomePageElement(req,res){
 
 async function EditHomePageElement(req,res){
    try{
-        if(req.body.site && req.body.title && req.body.type && req.body.img  && req.body.tokenJWT && req.body._id){
+        if(req.body.site && req.body.title && req.body.type   && req.body.tokenJWT && req.body._id){
              let check = await checkToken(req.body.tokenJWT);
              if(check.status){
                 ProductHomepage.updateOne(
@@ -46,7 +46,6 @@ async function EditHomePageElement(req,res){
                   {
                      $set:{
                         site: req.body.site,
-                        img:[req.body.img],
                         title: req.body.title,
                         type:req.body.type
                      }
@@ -102,19 +101,18 @@ async function DeleteHomePageElement(req,res){
 
 async function CreateProduct(req,res){
    try{
-        if(req.body.site && req.body.title && req.body.type && req.body.img  && req.body.tokenJWT && req.body.typeAdd){
+        if(req.body.site && req.body.title && req.body.type   && req.body.tokenJWT && req.body.typeAdd){
              let check = await checkToken(req.body.tokenJWT);
              if(check.status){
                 let newProduct = new Product({
                     site: req.body.site,
                     title: req.body.title,
                     type: req.body.type,
-                    img:[req.body.img],
                     typeAdd:req.body.typeAdd
                 });
-                newProduct.save().catch((e)=>{console.log("Error newProduct CreateProduct"); console.log(e)})
+                let savedProduct = await newProduct.save();
                 return res.json({
-                   data: newProduct,
+                   data: savedProduct,
                    error:null
                 })
              }
@@ -135,7 +133,8 @@ async function CreateProduct(req,res){
 
 async function EditProduct(req,res){
    try{
-        if(req.body.site && req.body.title && req.body.type  && req.body.tokenJWT && req.body._id && req.body.typeAdd){
+        console.log(req.body);
+        if(req.body.site && req.body.title && req.body.type  && req.body.tokenJWT && req.body._id ){
              let check = await checkToken(req.body.tokenJWT);
              if(check.status){
                 Product.updateOne(
