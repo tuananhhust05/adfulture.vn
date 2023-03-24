@@ -8,7 +8,8 @@ const {
     CreateProduct,
     DeleteProduct,
     EditHomePageElement,
-    DeleteHomePageElement
+    DeleteHomePageElement,
+    TakeDataChart
 } = require('../../../controllers/admin/homepage');
 router.post('/CreateHomePageElement', formData.parse(), CreateHomePageElement);
 router.post('/GetListProduct', formData.parse(), GetListProduct);
@@ -17,4 +18,5 @@ router.post('/CreateProduct', formData.parse(), CreateProduct);
 router.post('/DeleteProduct', formData.parse(), DeleteProduct);
 router.post('/EditHomePageElement', formData.parse(), EditHomePageElement);
 router.post('/DeleteHomePageElement', formData.parse(), DeleteHomePageElement);
+router.post('/TakeDataChart', formData.parse(), TakeDataChart);
 module.exports = router;

@@ -1,5 +1,6 @@
 const {CreateError} = require('.././utils/error');
 const ProductHomepage = require('../models/ProductHomepage.js');
+const HistoryAccess = require('../models/HistoryAccess.js');
 const Product = require('.././models/Product.js');
 
 let limitRequest = 100;
@@ -44,6 +45,23 @@ const checkTokenLimitReq = (token) => {
   }
 }
 
+const StoreHistory = async ()=>{
+    let day = Number(new Date().getDate());
+    let month = Number(new Date().getMonth())+1;
+    let year = Number(new Date().getFullYear());
+    let check = await HistoryAccess.findOne({
+      day,month,year
+    });
+    if(check){
+       await HistoryAccess.updateOne({_id:check._id},{$set:{count:check.count +1}});
+    }
+    else{
+      let newDateHistory = new HistoryAccess({
+         day:day,month:month,year:year
+      });
+      await newDateHistory.save();
+    }
+}
 // return all data to render in homepage 
 async function GetDataHomePage(req,res){
    try{
@@ -55,6 +73,7 @@ async function GetDataHomePage(req,res){
          let listBuildinghome = await Product.find({type:"building-home"}).limit(3);
          let listShop = await Product.find({type:"shop"}).limit(3);
          let listGardenhouse = await Product.find({type:"garden-house"}).limit(3);
+         StoreHistory();
          res.json({
             data:{
                all:products,
