@@ -1,319 +1,297 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="/assets/admin/img/sidebar-5.jpg">
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="/assets/logo/logo.png" class="simple-text">
-                    AdFuture
+<div class="apple-wrapper">
+    <!-- Sidebar -->
+    <aside class="apple-sidebar">
+        <div class="apple-sidebar-logo">
+            <a href="/admin/dashboard">
+                <img src="/assets/logo/logo.png" alt="AdFuture">
+                AdFuture
+            </a>
+        </div>
+        
+        <ul class="apple-nav">
+            <li class="apple-nav-item">
+                <a href="/admin/dashboard" class="apple-nav-link active">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Lưu lượng truy cập
+                </a>
+            </li>
+            <li class="apple-nav-item">
+                <a href="/admin/table" class="apple-nav-link">
+                    <i class="fa-solid fa-box"></i>
+                    Bảng tổng hợp sản phẩm
+                </a>
+            </li>
+            <li class="apple-nav-item">
+                <a href="/admin/tablehomepage" class="apple-nav-link">
+                    <i class="fa-solid fa-home"></i>
+                    Sản phẩm trang chủ
+                </a>
+            </li>
+            <li class="apple-nav-item">
+                <a href="/admin/editprice" class="apple-nav-link">
+                    <i class="fa-solid fa-tags"></i>
+                    Chỉnh sửa báo giá
+                </a>
+            </li>
+            <li class="apple-nav-item">
+                <a href="/admin/listRequestCustomer" class="apple-nav-link">
+                    <i class="fa-solid fa-envelope"></i>
+                    Ý kiến phản hồi
+                    <span class="apple-nav-badge" id="notification_count_unreadrequest">0</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="apple-main">
+        <header class="apple-header">
+            <button class="apple-menu-toggle" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1 class="apple-header-title">Dashboard</h1>
+            <div class="apple-header-actions">
+                <a href="/admin/login" class="apple-btn apple-btn-secondary">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất
                 </a>
             </div>
+        </header>
 
-            <ul class="nav">
-                <li class="active">
-                    <a href="/admin/dashboard">
-                        <i class="pe-7s-graph"></i>
-                        <p>Lưu lượng truy cập</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/table">
-                        <i class="pe-7s-note2"></i>
-                        <p>Bảng tổng hợp sản phẩm</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/tablehomepage">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Bảng sản phẩm trang chủ</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/editprice">
-                        <i class="fa-solid fa-money-bill"></i>
-                        <p>Chỉnh sửa báo giá</p>
-                    </a>
-                </li>
-                <li style="position:relative">
-                    <a href="/admin/listRequestCustomer">
-                        <div id="notification_count_unreadrequest">
-                             0
-                        </div>
-                        <i class="fa fa-envelope"></i>
-                        <p>Ý kiến phản hồi</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
-
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    
+        <div class="apple-content">
+            <!-- Stats Grid -->
+            <div class="apple-grid apple-grid-4 mb-4" id="stats-grid">
+                <div class="apple-stat-card">
+                    <div class="apple-stat-value" id="stat-today">--</div>
+                    <div class="apple-stat-label">Truy cập hôm nay</div>
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/admin/login">
-                                <p>Đăng xuất</p>
-                            </a>
-                        </li>
-						<li class="separator hidden-lg"></li>
-                    </ul>
+                <div class="apple-stat-card">
+                    <div class="apple-stat-value" id="stat-yesterday">--</div>
+                    <div class="apple-stat-label">Truy cập hôm qua</div>
+                </div>
+                <div class="apple-stat-card">
+                    <div class="apple-stat-value" id="stat-month">--</div>
+                    <div class="apple-stat-label">Truy cập tháng này</div>
+                </div>
+                <div class="apple-stat-card">
+                    <div class="apple-stat-value" id="stat-lastmonth">--</div>
+                    <div class="apple-stat-label">Truy cập tháng trước</div>
                 </div>
             </div>
-        </nav>
 
-
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-                    </div>
-                    <div class="col-md-6">
-                        <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
-                    </div>
+            <!-- Charts -->
+            <div class="apple-grid apple-grid-2 mb-4">
+                <div class="apple-chart-container">
+                    <h3 class="apple-chart-title">Thống kê theo ngày</h3>
+                    <canvas id="dailyChart"></canvas>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <canvas id="myChart3" style="width:100%;max-width:400px"></canvas>
-                    </div>
-                    <div class="col-md-6">
-                        <canvas id="myChart4" style="width:100%;max-width:400px"></canvas>
-                    </div>
+                <div class="apple-chart-container">
+                    <h3 class="apple-chart-title">Thống kê theo tháng</h3>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="apple-grid apple-grid-2">
+                <div class="apple-chart-container">
+                    <h3 class="apple-chart-title">So sánh ngày</h3>
+                    <canvas id="dayCompareChart"></canvas>
+                </div>
+                <div class="apple-chart-container">
+                    <h3 class="apple-chart-title">So sánh tháng</h3>
+                    <canvas id="monthCompareChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
-            </div>
+        <footer class="apple-footer">
+            &copy; 2024 AdFuture. All rights reserved.
         </footer>
-
-    </div>
+    </main>
 </div>
 
-<style>
-    /* custom css */
-    .sidebar .sidebar-wrapper {
-        background-color: rgba(42, 126, 250, 0.5);
-    }
-    #notification_count_unreadrequest{
-        background-color: red;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        border-radius: 100%;
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        padding: 5px;
-    }
-
-    #myChart{
-        height:500px;
-        width:500px;
-    }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 <script>
     let tokenJWT = localStorage['token'];
-    const takeDataTable = async ()=>{
-        let res = await axios({
-            method: "post",
-            url: "/api/admin/contact/CountUnreaderRequest",
-            data: {
-                tokenJWT
+    
+    const chartColors = {
+        blue: 'rgb(0, 113, 227)',
+        blueLight: 'rgba(0, 113, 227, 0.1)',
+        purple: 'rgb(175, 82, 222)',
+        purpleLight: 'rgba(175, 82, 222, 0.1)',
+        green: 'rgb(52, 199, 89)',
+        red: 'rgb(255, 59, 48)',
+        orange: 'rgb(255, 149, 0)',
+        gray: 'rgb(142, 142, 147)'
+    };
+
+    const chartDefaults = {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.05)'
+                },
+                ticks: {
+                    font: {
+                        family: '-apple-system, BlinkMacSystemFont, sans-serif'
+                    }
+                }
             },
-            headers: { "Content-Type": "multipart/form-data" }
-        })
-        if(res && res.data && res.data.data && res.data.data.count){
-            localStorage.setItem('countUnreaderRequest', String(res.data.data.count));
-            $(`#notification_count_unreadrequest`).html(`${String(res.data.data.count)}`)
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    font: {
+                        family: '-apple-system, BlinkMacSystemFont, sans-serif'
+                    }
+                }
+            }
+        }
+    };
+
+    const fetchDashboardData = async () => {
+        try {
+            const res = await axios({
+                method: "post",
+                url: "/api/admin/contact/CountUnreaderRequest",
+                data: { tokenJWT },
+                headers: { "Content-Type": "multipart/form-data" }
+            });
+            
+            if (res?.data?.data?.count) {
+                localStorage.setItem('countUnreaderRequest', String(res.data.data.count));
+                document.getElementById('notification_count_unreadrequest').textContent = res.data.data.count;
+            }
+
+            const chartRes = await axios({
+                method: "post",
+                url: "/api/admin/homepage/TakeDataChart",
+                data: { tokenJWT },
+                headers: { "Content-Type": "multipart/form-data" }
+            });
+
+            if (chartRes.data?.data) {
+                renderCharts(chartRes.data.data);
+            }
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        }
+    };
+
+    const renderCharts = (data) => {
+        const { listResultDate, listHitoryMonth } = data;
+
+        // Update stats
+        if (listResultDate?.length >= 2) {
+            document.getElementById('stat-today').textContent = listResultDate[0]?.count || 0;
+            document.getElementById('stat-yesterday').textContent = listResultDate[1]?.count || 0;
+        }
+        if (listHitoryMonth?.length >= 2) {
+            document.getElementById('stat-month').textContent = listHitoryMonth[0]?.count || 0;
+            document.getElementById('stat-lastmonth').textContent = listHitoryMonth[1]?.count || 0;
         }
 
-        let res2 = await  axios({
-            method: "post",
-            url: "/api/admin/homepage/TakeDataChart",
+        // Daily Chart
+        const dailyLabels = listResultDate.map(item => `${item.day}/${item.month}`);
+        const dailyData = listResultDate.map(item => item.count);
+        
+        new Chart(document.getElementById('dailyChart'), {
+            type: 'bar',
             data: {
-                tokenJWT
+                labels: dailyLabels,
+                datasets: [{
+                    data: dailyData,
+                    backgroundColor: chartColors.blue,
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
             },
-            headers: { "Content-Type": "multipart/form-data" }
+            options: chartDefaults
         });
-        if(res2.data && res2.data.data){
-            // dateChart
-            let listResultDate = res2.data.data.listResultDate;
-            let xValues = [];
-            for(let i=0; i<listResultDate.length; i++){
-                xValues.push(`${listResultDate[i].day}/${listResultDate[i].month}`)
-            }
-            let yValues = [];
-            for(let i = 0; i < listResultDate.length; i++) {
-                yValues.push(listResultDate[i].count)
-            }
-            let barColors = ["red", "green","blue","orange","brown"];
-            new Chart("myChart", {
-                type: "bar",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    title: {
-                    display: true,
-                    text: "Bảng thống kê lượng truy cập theo ngày"
+
+        // Monthly Chart
+        const monthlyLabels = listHitoryMonth.map(item => `${item.month}/${item.year}`);
+        const monthlyData = listHitoryMonth.map(item => item.count);
+        
+        new Chart(document.getElementById('monthlyChart'), {
+            type: 'bar',
+            data: {
+                labels: monthlyLabels,
+                datasets: [{
+                    data: monthlyData,
+                    backgroundColor: chartColors.purple,
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: chartDefaults
+        });
+
+        // Day Compare Pie Chart
+        new Chart(document.getElementById('dayCompareChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Hôm nay', 'Hôm qua'],
+                datasets: [{
+                    data: [listResultDate[0]?.count || 0, listResultDate[1]?.count || 0],
+                    backgroundColor: [chartColors.blue, chartColors.gray],
+                    borderWidth: 0,
+                    cutout: '70%'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, sans-serif'
+                            }
+                        }
                     }
                 }
-            });
-
-            // monthChart 
-            let listHitoryMonth = res2.data.data.listHitoryMonth;
-            let xValuesMonth = [];
-            for(let i=0; i<listHitoryMonth.length; i++){
-                xValuesMonth.push(`${listHitoryMonth[i].month}/${listHitoryMonth[i].year}`)
             }
-            let yValuesMonth = [];
-            for(let i = 0; i < listHitoryMonth.length; i++) {
-                yValuesMonth.push(listHitoryMonth[i].count)
+        });
+
+        // Month Compare Pie Chart
+        new Chart(document.getElementById('monthCompareChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Tháng này', 'Tháng trước'],
+                datasets: [{
+                    data: [listHitoryMonth[0]?.count || 0, listHitoryMonth[1]?.count || 0],
+                    backgroundColor: [chartColors.purple, chartColors.gray],
+                    borderWidth: 0,
+                    cutout: '70%'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, sans-serif'
+                            }
+                        }
+                    }
+                }
             }
-            let barColorsMonth = ["red", "green","blue","orange","brown"];
-            new Chart("myChart2", {
-                type: "bar",
-                data: {
-                    labels: xValuesMonth,
-                    datasets: [{
-                    backgroundColor: barColorsMonth,
-                    data: yValuesMonth
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    title: {
-                    display: true,
-                    text: "Bảng thống kê lượng truy cập theo tháng "
-                    }
-                }
-            });
+        });
+    };
 
-            // percent date 
-            let xValuesDateRound =["Hôm nay","Hôm qua"];
-            let yValuesRound = [listResultDate[0].count,listResultDate[1].count]
-            let barColorsRound = ["blue","red"];
-            new Chart("myChart3", {
-                type: "pie",
-                data: {
-                    labels: xValuesDateRound,
-                    datasets: [{
-                    backgroundColor: barColorsRound,
-                    data: yValuesRound
-                    }]
-                },
-                options: {
-                    title: {
-                    display: true,
-                    text: "Biểu đồ tham chiếu ngày"
-                    }
-                }
-            });
-
-             // percent date 
-            let xValuesMonthRound =["Tháng hiện tại","Tháng trước"];
-            let yValuesMonthRound = [listHitoryMonth[0].count,listHitoryMonth[1].count]
-            let barColorMonthRound = ["blue","red"];
-            new Chart("myChart4", {
-                type: "pie",
-                data: {
-                    labels: xValuesMonthRound,
-                    datasets: [{
-                    backgroundColor: barColorMonthRound,
-                    data: yValuesMonthRound
-                    }]
-                },
-                options: {
-                    title: {
-                    display: true,
-                    text: "Biểu đồ tham chiếu tháng"
-                    }
-                }
-            });
-        }
-    }
-    takeDataTable();
-
-    // new Chart("myChart2", {
-    //     type: "bar",
-    //     data: {
-    //         labels: xValues,
-    //         datasets: [{
-    //         backgroundColor: barColors,
-    //         data: yValues
-    //         }]
-    //     },
-    //     options: {
-    //         legend: {display: false},
-    //         title: {
-    //         display: true,
-    //         text: "World Wine Production 2018"
-    //         }
-    //     }
-    // });
-
-    // new Chart("myChart4", {
-    //     type: "pie",
-    //     data: {
-    //         labels: xValues,
-    //         datasets: [{
-    //         backgroundColor: barColors,
-    //         data: yValues
-    //         }]
-    //     },
-    //     options: {
-    //         title: {
-    //         display: true,
-    //         text: "World Wide Wine Production 2018"
-    //         }
-    //     }
-    // });
-
+    fetchDashboardData();
 </script>
