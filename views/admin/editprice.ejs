@@ -1,154 +1,328 @@
-<div class="apple-wrapper">
-    <!-- Sidebar -->
-    <aside class="apple-sidebar">
-        <div class="apple-sidebar-logo">
-            <a href="/admin/dashboard">
-                <img src="/assets/logo/logo.png" alt="AdFuture">
-                AdFuture
-            </a>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/assets/admin/img/sidebar-5.jpg">
+        <!--
+    
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+    
+        -->
+    
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="/assets/logo/logo.png" class="simple-text">
+                        AdFuture
+                    </a>
+                </div>
+    
+                <ul class="nav">
+                    <li>
+                        <a href="/admin/dashboard">
+                            <i class="pe-7s-graph"></i>
+                            <p>Lưu lượng truy cập</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="user.html">
+                            <i class="pe-7s-user"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="/admin/table">
+                            <i class="pe-7s-note2"></i>
+                            <p>Bảng tổng hợp sản phẩm</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/tablehomepage">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Bảng sản phẩm trang chủ</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/editprice">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <p>Chỉnh sửa báo giá</p>
+                        </a>
+                    </li>
+                    <li style="position:relative">
+                        <a href="/admin/listRequestCustomer">
+                            <div id="notification_count_unreadrequest">
+                                 0
+                            </div>
+                            <i class="fa fa-envelope"></i>
+                            <p>Ý kiến phản hồi</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="icons.html">
+                            <i class="pe-7s-science"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps.html">
+                            <i class="pe-7s-map-marker"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="upgrade.html">
+                            <i class="pe-7s-rocket"></i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/admin/login">
+                                <p>Đăng xuất</p>
+                            </a>
+                        </li>
+						<li class="separator hidden-lg"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Danh sách sản phẩm</h4>
+                                <p class="category">Bạn có thê chỉnh sửa thông tin hiển thị trên site tại đây</p>
+                                <div class="select_otion">
+                                    <button class="savechange_btn" onclick="SaveChange()">
+                                        Lưu
+                                     </button>
+                                     <p id="notification_save">
+                                        OK
+                                     </p>
+                                </div>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Thiết kế kiến trúc</th>
+                                    	<th>Thiết kế nội thất</th>
+                                    	<th>Thiết kế trọn gói</th>
+                                    </thead>
+                                    <tbody id="data_table_root">
+                                        
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <ul class="apple-nav">
-            <li class="apple-nav-item">
-                <a href="/admin/dashboard" class="apple-nav-link">
-                    <i class="fa-solid fa-chart-line"></i>
-                    Lưu lượng truy cập
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/table" class="apple-nav-link">
-                    <i class="fa-solid fa-box"></i>
-                    Bảng tổng hợp sản phẩm
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/tablehomepage" class="apple-nav-link">
-                    <i class="fa-solid fa-home"></i>
-                    Sản phẩm trang chủ
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/editprice" class="apple-nav-link active">
-                    <i class="fa-solid fa-tags"></i>
-                    Chỉnh sửa báo giá
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/listRequestCustomer" class="apple-nav-link">
-                    <i class="fa-solid fa-envelope"></i>
-                    Ý kiến phản hồi
-                    <span class="apple-nav-badge" id="notification_count_unreadrequest">0</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="apple-main">
-        <header class="apple-header">
-            <button class="apple-menu-toggle" onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <h1 class="apple-header-title">Chỉnh sửa báo giá</h1>
-            <div class="apple-header-actions">
-                <a href="/admin/login" class="apple-btn apple-btn-secondary">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Đăng xuất
-                </a>
-            </div>
-        </header>
-
-        <div class="apple-content">
-            <div class="apple-card">
-                <div class="apple-card-header">
-                    <div>
-                        <h2 class="apple-card-title">Bảng báo giá</h2>
-                        <p class="apple-card-subtitle">Cập nhật giá dịch vụ thiết kế</p>
-                    </div>
-                    <div class="apple-card-actions">
-                        <button class="apple-btn apple-btn-success" onclick="SaveChange()">
-                            <i class="fa-solid fa-save"></i>
-                            Lưu thay đổi
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="apple-card-body">
-                    <div class="apple-grid apple-grid-3">
-                        <div class="apple-form-group mb-0">
-                            <label class="apple-form-label">Thiết kế kiến trúc</label>
-                            <input type="text" class="apple-input" id="tkkt" placeholder="Nhập giá thiết kế kiến trúc">
-                        </div>
-                        <div class="apple-form-group mb-0">
-                            <label class="apple-form-label">Thiết kế nội thất</label>
-                            <input type="text" class="apple-input" id="tknt" placeholder="Nhập giá thiết kế nội thất">
-                        </div>
-                        <div class="apple-form-group mb-0">
-                            <label class="apple-form-label">Thiết kế trọn gói</label>
-                            <input type="text" class="apple-input" id="tktg" placeholder="Nhập giá thiết kế trọn gói">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="apple-card">
-                <div class="apple-card-body">
-                    <div class="apple-empty-state">
-                        <i class="fa-solid fa-info-circle"></i>
-                        <h3>Hướng dẫn</h3>
-                        <p>Nhập đơn giá cho từng loại dịch vụ thiết kế. Giá sẽ được hiển thị trên website.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer class="apple-footer">
-            &copy; 2024 AdFuture. All rights reserved.
-        </footer>
-    </main>
+    </div>
 </div>
 
+<style>
+    /* custom css */
+    .sidebar .sidebar-wrapper {
+        background-color: rgba(42, 126, 250, 0.5);
+    }
+
+    #data_table_root .img_product{
+        width:40px;
+        height:40px;
+    }
+    .add_product,
+    .select_otion{
+        display:flex;
+        padding: 10px 0px;
+        height: 50px;
+        margin: 5px 0px;
+    }
+    input[type=file] {
+        width: 100px;
+    }
+    .add_product_btn,
+    .savechange_btn{
+       background-color: green;
+       border-radius:5px;
+       opacity:0.7;
+       color:white;
+       cursor:pointer;
+       margin:0px 10px;
+       border:0px;
+    }
+    .add_product_btn{
+        margin:0px;
+    }
+    .savechange_btn:hover{
+        transition:all 0.3s;
+        transform:scale(1.1);
+    }
+
+    #notification_save{
+        display:none;
+        color:blue;
+        opacity:0.7;
+        margin:0px 10px;
+
+    }
+
+    .btn-primary{
+        padding:0px;
+        margin:0px;
+    }
+    .td_product{
+        padding:0px;
+    }
+    /* tạo sản phẩm */
+    #form_create_product{
+        position:fixed;
+        background-color: white;
+        border-radius:5px;
+        width:80%;
+        right:10%;
+        left:10%;
+        height:70%;
+        top:20%;
+        z-index:10;
+        opacity:1;
+        box-shadow: 3px 3px 3px rgba(46, 83, 255, 0.7);
+        border-color: rgba(46, 83, 255, 0.7);
+        border-width: 3px;
+        padding:15px;
+        margin:15px;
+        display:none;
+    }
+    #form_create_product .form_create_product_container{
+        position:relative;
+        padding:10px;
+    }
+    .input_create{
+        height: 5%;
+        padding: 15px;
+        margin: 15px 15%;
+        width:75%;
+        left:10%;
+        right:10%;
+    }
+    #form_create_product .form_create_product_container .icon_form_create{
+        position:absolute;
+        font-size: 20px;
+        top:0px;
+        right:0px;
+        cursor:pointer;
+        z-index:100;
+    }
+    #form_create_product .form_create_product_container .icon_form_create:hover{
+        transition:all 0.3s;
+        transform:scale(1.1);
+    }
+    .add_btn_form_creacte{
+        width:30%;
+        margin:10px 38%;
+    }
+
+    #notification_count_unreadrequest{
+        background-color: red;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border-radius: 100%;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        padding: 5px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 <script>
+    let arrIdChange = [];
     let tokenJWT = localStorage['token'];
-    
-    document.getElementById('notification_count_unreadrequest').textContent = localStorage['countUnreaderRequest'] || '0';
-    
-    const takeDataTable = async () => {
-        try {
-            const res = await axios.get('/api/admin/price/getPrice');
-            
-            if (res.data?.data) {
-                document.getElementById('tkkt').value = res.data.data.tkkt || '';
-                document.getElementById('tknt').value = res.data.data.tknt || '';
-                document.getElementById('tktg').value = res.data.data.tktg || '';
-            } else {
-                window.location.href = "/";
-            }
-        } catch (error) {
-            console.error('Error:', error);
+    $(`#notification_count_unreadrequest`).html(`${String(localStorage['countUnreaderRequest'])}`)
+    const takeDataTable = async ()=>{
+        let res = await axios.get('/api/admin/price/getPrice');
+        if(res.data && res.data.data ){
+            $('#data_table_root').html('')
+            $('#data_table_root').append(`
+                        <tr>
+                            <td class="td_product">
+                                <input type="text" 
+                                       id="tkkt"
+                                       value="${res.data.data.tkkt}" 
+                                       class="btn btn-primary"/>
+                            </td>
+                            <td class="td_product">
+                                <input 
+                                      id="tknt"
+                                      value="${res.data.data.tknt}" class="btn btn-primary"/>
+                            </td>
+                            <td class="td_product">
+                                <input 
+                                      id="tktg"
+                                      value="${res.data.data.tktg}" class="btn btn-primary"/>
+                            </td>
+                        </tr>
+                `);
         }
-    };
-    
+        else{
+            window.location.href = "/";
+        }
+    }
     takeDataTable();
 
-    const SaveChange = async () => {
-        try {
-            await axios({
-                method: "post",
-                url: "/api/admin/price/editPrice",
-                data: {
-                    tknt: document.getElementById('tknt').value,
-                    tkkt: document.getElementById('tkkt').value,
-                    type: document.getElementById('tktg').value,
-                    tokenJWT
-                },
-                headers: { "Content-Type": "multipart/form-data" }
-            });
-            
-            showToast('Lưu thành công!');
-        } catch (error) {
-            console.error(error);
-            showToast('Có lỗi xảy ra!', 'error');
+    const SaveChange = async () =>{
+        try{
+            axios({
+                    method: "post",
+                    url: "/api/admin/price/editPrice",
+                    data: {
+                        tknt:$(`#tknt`).val(),
+                        tkkt:$(`#tkkt`).val(),
+                        type:$(`#tktg`).val(),
+                        tokenJWT
+                    },
+                    headers: { "Content-Type": "multipart/form-data" }
+                }).catch((e)=>{
+                    console.log("SaveChange",e)
+                })
+            $('#notification_save').show();
+            setTimeout(()=>{
+                $('#notification_save').hide();
+            },2000);
         }
-    };
+        catch(e){
+            console.log(e);
+        }
+    }  
+
+
+    
 </script>

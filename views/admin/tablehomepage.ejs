@@ -1,307 +1,527 @@
-<div class="apple-wrapper">
-    <!-- Sidebar -->
-    <aside class="apple-sidebar">
-        <div class="apple-sidebar-logo">
-            <a href="/admin/dashboard">
-                <img src="/assets/logo/logo.png" alt="AdFuture">
-                AdFuture
-            </a>
-        </div>
-        
-        <ul class="apple-nav">
-            <li class="apple-nav-item">
-                <a href="/admin/dashboard" class="apple-nav-link">
-                    <i class="fa-solid fa-chart-line"></i>
-                    Lưu lượng truy cập
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/table" class="apple-nav-link">
-                    <i class="fa-solid fa-box"></i>
-                    Bảng tổng hợp sản phẩm
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/tablehomepage" class="apple-nav-link active">
-                    <i class="fa-solid fa-home"></i>
-                    Sản phẩm trang chủ
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/editprice" class="apple-nav-link">
-                    <i class="fa-solid fa-tags"></i>
-                    Chỉnh sửa báo giá
-                </a>
-            </li>
-            <li class="apple-nav-item">
-                <a href="/admin/listRequestCustomer" class="apple-nav-link">
-                    <i class="fa-solid fa-envelope"></i>
-                    Ý kiến phản hồi
-                    <span class="apple-nav-badge" id="notification_count_unreadrequest">0</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Main Content -->
-    <main class="apple-main">
-        <header class="apple-header">
-            <button class="apple-menu-toggle" onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <h1 class="apple-header-title">Sản phẩm trang chủ</h1>
-            <div class="apple-header-actions">
-                <a href="/admin/login" class="apple-btn apple-btn-secondary">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Đăng xuất
-                </a>
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/assets/admin/img/sidebar-5.jpg">
+        <!--
+    
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+    
+        -->
+    
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="/assets/logo/logo.png" class="simple-text">
+                        AdFuture
+                    </a>
+                </div>
+    
+                <ul class="nav">
+                    <li>
+                        <a href="/admin/dashboard">
+                            <i class="pe-7s-graph"></i>
+                            <p>Lưu lượng truy cập</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="user.html">
+                            <i class="pe-7s-user"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="/admin/table">
+                            <i class="pe-7s-note2"></i>
+                            <p>Bảng tổng hợp sản phẩm</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/tablehomepage">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Bảng sản phẩm trang chủ</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/editprice">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <p>Chỉnh sửa báo giá</p>
+                        </a>
+                    </li>
+                    <li style="position:relative">
+                        <a href="/admin/listRequestCustomer">
+                            <div id="notification_count_unreadrequest">
+                                 0
+                            </div>
+                            <i class="fa fa-envelope"></i>
+                            <p>Ý kiến phản hồi</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="icons.html">
+                            <i class="pe-7s-science"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps.html">
+                            <i class="pe-7s-map-marker"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="upgrade.html">
+                            <i class="pe-7s-rocket"></i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li> -->
+                </ul>
             </div>
-        </header>
+    </div>
 
-        <div class="apple-content">
-            <div class="apple-card">
-                <div class="apple-card-header">
-                    <div>
-                        <h2 class="apple-card-title">Danh sách sản phẩm trang chủ</h2>
-                        <p class="apple-card-subtitle">Quản lý sản phẩm hiển thị trên trang chủ</p>
-                    </div>
-                    <div class="apple-card-actions">
-                        <button class="apple-btn apple-btn-success" onclick="SaveChange()">
-                            <i class="fa-solid fa-save"></i>
-                            Lưu thay đổi
-                        </button>
-                        
-                        <button class="apple-btn apple-btn-primary" onclick="handleOpenFormCreateProduct()">
-                            <i class="fa-solid fa-plus"></i>
-                            Thêm sản phẩm
-                        </button>
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/admin/login">
+                                <p>Đăng xuất</p>
+                            </a>
+                        </li>
+						<li class="separator hidden-lg"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Danh sách sản phẩm</h4>
+                                <p class="category">Bạn có thê chỉnh sửa thông tin hiển thị trên site tại đây</p>
+                                <div class="select_otion">
+                                    <button class="savechange_btn" onclick="SaveChange()">
+                                        Lưu
+                                     </button>
+                                     <p id="notification_save">
+                                        OK
+                                     </p>
+                                </div>
+                                <div class="add_product">
+                                    <button class="add_product_btn" onclick="handleOpenFormCreateProduct()">
+                                        Thêm sản phẩm 
+                                     </button>
+                                </div>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Địa điểm</th>
+                                    	<th>Tiêu đề</th>
+                                    	<th>Loại sản phẩm</th>
+                                    	<th>Hình ảnh</th>
+                                    </thead>
+                                    <tbody id="data_table_root">
+                                        
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="apple-card-body" style="padding: 0;">
-                    <table class="apple-table">
-                        <thead>
-                            <tr>
-                                <th>Địa điểm</th>
-                                <th>Tiêu đề</th>
-                                <th>Loại sản phẩm</th>
-                                <th>Hình ảnh</th>
-                                <th>Tải ảnh</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="data_table_root">
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
 
-        <footer class="apple-footer">
-            &copy; 2024 AdFuture. All rights reserved.
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
         </footer>
-    </main>
-</div>
-
-<!-- Modal Create Product -->
-<div class="apple-modal-overlay" id="createProductModal">
-    <div class="apple-modal">
-        <div class="apple-modal-header">
-            <h3 class="apple-modal-title">Thêm sản phẩm trang chủ</h3>
-            <button class="apple-modal-close" onclick="handleCloseFormCreateProduct()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="apple-modal-body">
-            <div class="apple-form-group">
-                <label class="apple-form-label">Loại sản phẩm</label>
-                <input type="text" class="apple-input" id="create_type" placeholder="Ví dụ: featured, new...">
-            </div>
-            <div class="apple-form-group">
-                <label class="apple-form-label">Tiêu đề</label>
-                <input type="text" class="apple-input" id="create_title" placeholder="Nhập tiêu đề sản phẩm">
-            </div>
-            <div class="apple-form-group mb-0">
-                <label class="apple-form-label">Địa điểm</label>
-                <input type="text" class="apple-input" id="create_site" placeholder="Nhập địa điểm">
-            </div>
-        </div>
-        <div class="apple-modal-footer">
-            <button class="apple-btn apple-btn-secondary" onclick="handleCloseFormCreateProduct()">Hủy</button>
-            <button class="apple-btn apple-btn-primary" onclick="CreateProduct()">Thêm sản phẩm</button>
+    </div>
+    <div id="form_create_product">
+        <div class="form_create_product_container">
+            <i class="fa-solid fa-xmark icon_form_create" onclick="handleCloseFormCreateProduct()"></i>
+            <input type="text" placeholder="type" class="btn btn-primary input_create" id="create_type"/>
+            <input type="text" placeholder="title" class="btn btn-primary input_create" id="create_title"/>
+            <input type="text" placeholder="site" class="btn btn-primary input_create" id="create_site"/>
+            <button class="btn btn-success add_btn_form_creacte" onclick="CreateProduct()" >Thêm</button>
         </div>
     </div>
 </div>
 
+<style>
+    /* custom css */
+    .sidebar .sidebar-wrapper {
+        background-color: rgba(42, 126, 250, 0.5);
+    }
+
+    #data_table_root .img_product{
+        width:40px;
+        height:40px;
+    }
+    .add_product,
+    .select_otion{
+        display:flex;
+        padding: 10px 0px;
+        height: 50px;
+        margin: 5px 0px;
+    }
+    input[type=file] {
+        width: 100px;
+    }
+    .add_product_btn,
+    .savechange_btn{
+       background-color: green;
+       border-radius:5px;
+       opacity:0.7;
+       color:white;
+       cursor:pointer;
+       margin:0px 10px;
+       border:0px;
+    }
+    .add_product_btn{
+        margin:0px;
+    }
+    .savechange_btn:hover{
+        transition:all 0.3s;
+        transform:scale(1.1);
+    }
+
+    #notification_save{
+        display:none;
+        color:blue;
+        opacity:0.7;
+        margin:0px 10px;
+
+    }
+
+    .btn-primary{
+        padding:0px;
+        margin:0px;
+    }
+    .td_product{
+        padding:0px;
+    }
+    /* tạo sản phẩm */
+    #form_create_product{
+        position:fixed;
+        background-color: white;
+        border-radius:5px;
+        width:80%;
+        right:10%;
+        left:10%;
+        height:70%;
+        top:20%;
+        z-index:10;
+        opacity:1;
+        box-shadow: 3px 3px 3px rgba(46, 83, 255, 0.7);
+        border-color: rgba(46, 83, 255, 0.7);
+        border-width: 3px;
+        padding:15px;
+        margin:15px;
+        display:none;
+    }
+    #form_create_product .form_create_product_container{
+        position:relative;
+        padding:10px;
+    }
+    .input_create{
+        height: 5%;
+        padding: 15px;
+        margin: 15px 15%;
+        width:75%;
+        left:10%;
+        right:10%;
+    }
+    #form_create_product .form_create_product_container .icon_form_create{
+        position:absolute;
+        font-size: 20px;
+        top:0px;
+        right:0px;
+        cursor:pointer;
+        z-index:100;
+    }
+    #form_create_product .form_create_product_container .icon_form_create:hover{
+        transition:all 0.3s;
+        transform:scale(1.1);
+    }
+    .add_btn_form_creacte{
+        width:30%;
+        margin:10px 38%;
+    }
+
+    #notification_count_unreadrequest{
+        background-color: red;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border-radius: 100%;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        padding: 5px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 <script>
     let arrIdChange = [];
     let tokenJWT = localStorage['token'];
-    
-    document.getElementById('notification_count_unreadrequest').textContent = localStorage['countUnreaderRequest'] || '0';
-    
-    const takeDataTable = async () => {
-        try {
-            const res = await axios.get('/api/homepage/GetDataHomePage');
-            
-            if (res.data?.data?.all) {
-                const tbody = document.getElementById('data_table_root');
-                tbody.innerHTML = '';
-                
-                res.data.data.all.forEach(item => {
-                    tbody.innerHTML += `
-                        <tr id="${item._id}">
-                            <td>
-                                <input type="text" class="apple-input apple-input-sm"
-                                    onchange="ChangeDataProduct('${item._id}')"
-                                    id="${item._id}site"
-                                    value="${item.site}">
+    $(`#notification_count_unreadrequest`).html(`${String(localStorage['countUnreaderRequest'])}`)
+    const takeDataTable = async ()=>{
+        let res = await axios.get('/api/homepage/GetDataHomePage');
+        if(res.data && res.data.data && res.data.data.all){
+            $('#data_table_root').html('')
+            for(let i=0; i < res.data.data.all.length; i++){
+                $('#data_table_root').append(`
+                        <tr id="${res.data.data.all[i]._id}">
+                            <td class="td_product">
+                                <input type="text" 
+                                       onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                       id="${res.data.data.all[i]._id}site"
+                                       value="${res.data.data.all[i].site}" 
+                                       class="btn btn-primary"/>
                             </td>
-                            <td>
-                                <input type="text" class="apple-input apple-input-sm"
-                                    onchange="ChangeDataProduct('${item._id}')"
-                                    id="${item._id}title"
-                                    value="${item.title}">
+                            <td class="td_product">
+                                <input 
+                                      onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                      id="${res.data.data.all[i]._id}title" 
+                                      value="${res.data.data.all[i].title}" class="btn btn-primary"/>
                             </td>
-                            <td>
-                                <input type="text" class="apple-input apple-input-sm"
-                                    onchange="ChangeDataProduct('${item._id}')"
-                                    id="${item._id}type"
-                                    value="${item.type}">
+                            <td class="td_product">
+                                <input 
+                                      onchange="ChangeDataProduct('${res.data.data.all[i]._id}')"
+                                      id="${res.data.data.all[i]._id}type" 
+                                      value="${res.data.data.all[i].type}" class="btn btn-primary"/>
                             </td>
-                            <td>
-                                <img class="apple-table-img" id="${item._id}img"
-                                    src="${item.img[0]}" alt="${item.title}">
+                            <td class="td_product">
+                                <img className="img_product" style="height:40px;width:40px;border-radius:3px" 
+                                     id="${res.data.data.all[i]._id}img"
+                                     src="${res.data.data.all[i].img[0]}" alt="img${res.data.data.all[i]._id}"/>
                             </td>
-                            <td>
-                                <div class="apple-file-input">
-                                    <input type="file" id="file${item._id}" 
-                                        onchange="StartUploadFile('${item._id}')">
-                                    <span class="apple-file-label">
-                                        <i class="fa-solid fa-upload"></i>
-                                        Tải lên
-                                    </span>
+                            <td class="td_product">
+                                <div >
+                                    <input onchange="StartUploadFile('${res.data.data.all[i]._id}')" class="btn btn-primary" type="file" id="file${res.data.data.all[i]._id}" name="file" />
                                 </div>
                             </td>
-                            <td>
-                                <button class="apple-btn apple-btn-danger apple-btn-sm" 
-                                    onclick="DeleteProduct('${item._id}')">
-                                    <i class="fa-solid fa-trash"></i>
+                            <td class="td_product" onclick="DeleteProduct('${res.data.data.all[i]._id}')">
+                                <button class="btn btn-danger">
+                                    Xóa
                                 </button>
                             </td>
                         </tr>
-                    `;
-                });
-            } else {
-                window.location.href = "/";
+                `);
             }
-        } catch (error) {
-            console.error('Error:', error);
         }
-    };
-    
+        else{
+            window.location.href = "/";
+        }
+    }
     takeDataTable();
 
-    const StartUploadFile = async (id) => {
-        try {
-            const fd = new FormData();
-            const file = document.getElementById(`file${id}`).files[0];
+    const StartUploadFile = async (id)=>{
+        try{
+            const config = {
+                header: { 'Content-Type': 'multipart/form-data' }
+            };
+            let fd = new FormData();
+            let file = $(`#file${id}`)[0].files[0];
             fd.append('file', file);
-            fd.append('IdProduct', id);
-            fd.append('tokenJWT', tokenJWT);
-            
-            const response = await axios.post('/api/admin/file/upload/homepageproduct', fd, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
-            
-            if (response?.data?.data) {
-                document.getElementById(`${id}img`).src = response.data.data;
-                showToast('Tải ảnh thành công!');
-            }
-        } catch (error) {
-            console.error(error);
-            showToast('Có lỗi xảy ra!', 'error');
+            fd.append('IdProduct',id);
+            fd.append('tokenJWT',tokenJWT)
+            axios.post(`/api/admin/file/upload/homepageproduct`,fd, config)
+                .then(response => {
+                    if (response && response.data && response.data.data) {
+                        $(`#${id}img`).attr("src", response.data.data);
+                        console.log(response.data.data);
+                    }
+            }).catch((e)=>{console.log(e)});
+            console.log(file);
         }
-    };
-
-    const ChangeDataProduct = (id) => {
-        if (!arrIdChange.includes(id)) {
-            arrIdChange.push(id);
+        catch(e){
+            console.log(e)
         }
-    };
-
-    const SaveChange = async () => {
-        if (arrIdChange.length) {
-            for (const id of arrIdChange) {
-                await axios({
-                    method: "post",
-                    url: "/api/admin/homepage/EditHomePageElement",
-                    data: {
-                        site: document.getElementById(`${id}site`).value,
-                        title: document.getElementById(`${id}title`).value,
-                        type: document.getElementById(`${id}type`).value,
-                        _id: id,
-                        tokenJWT
-                    },
-                    headers: { "Content-Type": "multipart/form-data" }
-                });
-            }
-            arrIdChange = [];
-            showToast('Lưu thành công!');
+    }
+    
+    // just change when you click to other position 
+    const ChangeDataProduct = (id)=>{
+        try{
+            if(!arrIdChange.find((e)=> String(e) === String(id))){
+                arrIdChange.push(String(id));
+            };
         }
-    };
+        catch(e){
+            console.log(e);
+        }
+    }
 
-    const handleOpenFormCreateProduct = () => {
-        document.getElementById('createProductModal').classList.add('active');
-    };
+    const SaveChange = async () =>{
+        try{
+           if(arrIdChange.length){
+               for(let i=0; i<arrIdChange.length; i++){
+                    axios({
+                        method: "post",
+                        url: "/api/admin/homepage/EditHomePageElement",
+                        data: {
+                            site:$(`#${arrIdChange[i]}site`).val(),
+                            title:$(`#${arrIdChange[i]}title`).val(),
+                            type:$(`#${arrIdChange[i]}type`).val(),
+                            _id:arrIdChange[i],
+                            tokenJWT
+                        },
+                        headers: { "Content-Type": "multipart/form-data" }
+                    }).catch((e)=>{
+                        console.log("SaveChange",e)
+                    })
+               };
+               $('#notification_save').show();
+           }
+           setTimeout(()=>{
+             $('#notification_save').hide();
+           },2000);
+        }
+        catch(e){
+            console.log(e);
+        }
+    }  
 
-    const handleCloseFormCreateProduct = () => {
-        document.getElementById('createProductModal').classList.remove('active');
-    };
+    const handleOpenFormCreateProduct = ()=>{
+        try{
+           $('#form_create_product').show();
+        }
+        catch(e){
+           console.log(e);
+        }
+    }
 
-    const CreateProduct = async () => {
-        try {
-            const res = await axios({
+    const handleCloseFormCreateProduct = ()=>{
+        try{
+           document.getElementById('form_create_product').style.display = 'none';
+        }
+        catch(e){
+           console.log(e);
+        }
+    }
+    
+    const CreateProduct = async ()=>{
+        try{
+            let res = await axios({
                 method: "post",
                 url: "/api/admin/homepage/CreateHomePageElement",
                 data: {
-                    site: document.getElementById('create_site').value,
-                    title: document.getElementById('create_title').value,
-                    type: document.getElementById('create_type').value,
+                    site:$(`#create_site`).val(),
+                    title:$(`#create_title`).val(),
+                    type:$(`#create_type`).val(),
                     tokenJWT
                 },
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            
-            if (res?.data?.data) {
-                handleCloseFormCreateProduct();
-                takeDataTable();
-                showToast('Thêm sản phẩm thành công!');
-                
-                document.getElementById('create_site').value = '';
-                document.getElementById('create_title').value = '';
-                document.getElementById('create_type').value = '';
-            }
-        } catch (error) {
-            console.error(error);
-            showToast('Có lỗi xảy ra!', 'error');
-        }
-    };
+            if(res && res.data && res.data.data){
+                $('#data_table_root').prepend(`
+                        <tr id="${res.data.data._id}">
+                            <td class="td_product">
+                                <input type="text" 
+                                       onchange="ChangeDataProduct('${res.data.data._id}')"
+                                       id="${res.data.data._id}site"
+                                       value="${res.data.data.site}" 
+                                       class="btn btn-primary"/>
+                            </td>
+                            <td class="td_product">
+                                <input 
+                                      onchange="ChangeDataProduct('${res.data.data._id}')"
+                                      id="${res.data.data._id}title" 
+                                      value="${res.data.data.title}" class="btn btn-primary"/>
+                            </td>
+                            <td class="td_product">
+                                <input 
+                                      onchange="ChangeDataProduct('${res.data.data._id}')"
+                                      id="${res.data.data._id}type" 
+                                      value="${res.data.data.type}" class="btn btn-primary"/>
+                            </td>
+                            <td class="td_product">
+                                <img className="img_product" style="height:40px;width:40px;border-radius:3px" 
+                                     id="${res.data.data._id}img"
+                                     src="" alt="img${res.data.data._id}"/>
+                            </td>
+                            <td class="td_product">
+                                <div >
+                                    <input onchange="StartUploadFile('${res.data.data._id}')" class="btn btn-primary" type="file" id="file${res.data.data._id}" name="file" />
+                                </div>
+                            </td>
+                            <td class="td_product">
+                                <button class="btn btn-danger" onclick="DeleteProduct('${res.data.data._id}')">
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                `);
 
-    const DeleteProduct = async (id) => {
-        if (confirm('Bạn có chắc muốn xóa sản phẩm này?')) {
-            try {
-                await axios({
-                    method: "post",
-                    url: "/api/admin/homepage/DeleteHomePageElement",
-                    data: { _id: id, tokenJWT },
-                    headers: { "Content-Type": "multipart/form-data" }
-                });
-                document.getElementById(id).remove();
-                showToast('Xóa sản phẩm thành công!');
-            } catch (error) {
-                console.error(error);
-                showToast('Có lỗi xảy ra!', 'error');
+                document.getElementById('form_create_product').style.display = 'none';
             }
         }
-    };
+        catch(e){
+            console.log(e);
+        }
+    }
+    
+    const DeleteProduct = async (id)=>{
+        axios({
+                method: "post",
+                url: "/api/admin/homepage/DeleteHomePageElement",
+                data: {
+                    _id:id,
+                    tokenJWT
+                },
+                headers: { "Content-Type": "multipart/form-data" }
+        }).catch((e)=>{
+             console.log(e);
+        });
+        $(`#${id}`).hide();
+    }
 </script>
