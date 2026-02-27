@@ -1,4 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
 <div class="apple-wrapper">
     <!-- Sidebar -->
@@ -61,46 +61,63 @@
         </header>
 
         <div class="apple-content">
-            <!-- Stats Grid -->
-            <div class="apple-grid apple-grid-4 mb-4" id="stats-grid">
-                <div class="apple-stat-card">
-                    <div class="apple-stat-value" id="stat-today">--</div>
-                    <div class="apple-stat-label">Truy cập hôm nay</div>
-                </div>
-                <div class="apple-stat-card">
-                    <div class="apple-stat-value" id="stat-yesterday">--</div>
-                    <div class="apple-stat-label">Truy cập hôm qua</div>
-                </div>
-                <div class="apple-stat-card">
-                    <div class="apple-stat-value" id="stat-month">--</div>
-                    <div class="apple-stat-label">Truy cập tháng này</div>
-                </div>
-                <div class="apple-stat-card">
-                    <div class="apple-stat-value" id="stat-lastmonth">--</div>
-                    <div class="apple-stat-label">Truy cập tháng trước</div>
-                </div>
+            <!-- Loading State -->
+            <div id="loading-state" class="apple-card" style="text-align: center; padding: 60px;">
+                <div class="apple-loading"></div>
+                <p style="margin-top: 16px; color: var(--apple-text-secondary);">Đang tải dữ liệu...</p>
             </div>
-
-            <!-- Charts -->
-            <div class="apple-grid apple-grid-2 mb-4">
-                <div class="apple-chart-container">
-                    <h3 class="apple-chart-title">Thống kê theo ngày</h3>
-                    <canvas id="dailyChart"></canvas>
-                </div>
-                <div class="apple-chart-container">
-                    <h3 class="apple-chart-title">Thống kê theo tháng</h3>
-                    <canvas id="monthlyChart"></canvas>
-                </div>
+            
+            <!-- Error State -->
+            <div id="error-state" class="apple-card" style="display: none; text-align: center; padding: 60px;">
+                <i class="fa-solid fa-exclamation-triangle" style="font-size: 48px; color: var(--apple-orange); margin-bottom: 16px;"></i>
+                <h3 style="margin-bottom: 8px;">Không thể tải dữ liệu</h3>
+                <p style="color: var(--apple-text-secondary); margin-bottom: 16px;" id="error-message">Vui lòng kiểm tra kết nối và thử lại.</p>
+                <button class="apple-btn apple-btn-primary" onclick="fetchDashboardData()">Thử lại</button>
             </div>
-
-            <div class="apple-grid apple-grid-2">
-                <div class="apple-chart-container">
-                    <h3 class="apple-chart-title">So sánh ngày</h3>
-                    <canvas id="dayCompareChart"></canvas>
+            
+            <!-- Main Content (hidden initially) -->
+            <div id="main-content" style="display: none;">
+                <!-- Stats Grid -->
+                <div class="apple-grid apple-grid-4 mb-4" id="stats-grid">
+                    <div class="apple-stat-card">
+                        <div class="apple-stat-value" id="stat-today">0</div>
+                        <div class="apple-stat-label">Truy cập hôm nay</div>
+                    </div>
+                    <div class="apple-stat-card">
+                        <div class="apple-stat-value" id="stat-yesterday">0</div>
+                        <div class="apple-stat-label">Truy cập hôm qua</div>
+                    </div>
+                    <div class="apple-stat-card">
+                        <div class="apple-stat-value" id="stat-month">0</div>
+                        <div class="apple-stat-label">Truy cập tháng này</div>
+                    </div>
+                    <div class="apple-stat-card">
+                        <div class="apple-stat-value" id="stat-lastmonth">0</div>
+                        <div class="apple-stat-label">Truy cập tháng trước</div>
+                    </div>
                 </div>
-                <div class="apple-chart-container">
-                    <h3 class="apple-chart-title">So sánh tháng</h3>
-                    <canvas id="monthCompareChart"></canvas>
+
+                <!-- Charts -->
+                <div class="apple-grid apple-grid-2 mb-4">
+                    <div class="apple-chart-container">
+                        <h3 class="apple-chart-title">Thống kê theo ngày</h3>
+                        <canvas id="dailyChart" style="max-height: 300px;"></canvas>
+                    </div>
+                    <div class="apple-chart-container">
+                        <h3 class="apple-chart-title">Thống kê theo tháng</h3>
+                        <canvas id="monthlyChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+
+                <div class="apple-grid apple-grid-2">
+                    <div class="apple-chart-container">
+                        <h3 class="apple-chart-title">So sánh ngày</h3>
+                        <canvas id="dayCompareChart" style="max-height: 300px;"></canvas>
+                    </div>
+                    <div class="apple-chart-container">
+                        <h3 class="apple-chart-title">So sánh tháng</h3>
+                        <canvas id="monthCompareChart" style="max-height: 300px;"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,40 +142,30 @@
         gray: 'rgb(142, 142, 147)'
     };
 
-    const chartDefaults = {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: 'rgba(0, 0, 0, 0.05)'
-                },
-                ticks: {
-                    font: {
-                        family: '-apple-system, BlinkMacSystemFont, sans-serif'
-                    }
-                }
-            },
-            x: {
-                grid: {
-                    display: false
-                },
-                ticks: {
-                    font: {
-                        family: '-apple-system, BlinkMacSystemFont, sans-serif'
-                    }
-                }
-            }
-        }
+    Chart.defaults.global.defaultFontFamily = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif";
+
+    const showLoading = () => {
+        document.getElementById('loading-state').style.display = 'block';
+        document.getElementById('error-state').style.display = 'none';
+        document.getElementById('main-content').style.display = 'none';
+    };
+    
+    const showError = (message) => {
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('error-state').style.display = 'block';
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('error-message').textContent = message || 'Vui lòng kiểm tra kết nối và thử lại.';
+    };
+    
+    const showContent = () => {
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('error-state').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
     };
 
     const fetchDashboardData = async () => {
+        showLoading();
+        
         try {
             const res = await axios({
                 method: "post",
@@ -167,7 +174,7 @@
                 headers: { "Content-Type": "multipart/form-data" }
             });
             
-            if (res?.data?.data?.count) {
+            if (res?.data?.data?.count !== undefined) {
                 localStorage.setItem('countUnreaderRequest', String(res.data.data.count));
                 document.getElementById('notification_count_unreadrequest').textContent = res.data.data.count;
             }
@@ -179,23 +186,38 @@
                 headers: { "Content-Type": "multipart/form-data" }
             });
 
+            console.log('Chart Response:', chartRes.data);
+
             if (chartRes.data?.data) {
+                showContent();
                 renderCharts(chartRes.data.data);
+            } else if (chartRes.data?.error) {
+                showError(chartRes.data.error);
+            } else {
+                showError('Token không hợp lệ. Vui lòng đăng nhập lại.');
             }
         } catch (error) {
             console.error('Error fetching dashboard data:', error);
+            showError('Lỗi kết nối server: ' + (error.message || 'Unknown error'));
         }
     };
 
     const renderCharts = (data) => {
         const { listResultDate, listHitoryMonth } = data;
+        
+        console.log('Rendering charts with data:', { listResultDate, listHitoryMonth });
+
+        if (!listResultDate || !listHitoryMonth) {
+            console.error('Missing chart data');
+            return;
+        }
 
         // Update stats
-        if (listResultDate?.length >= 2) {
+        if (listResultDate.length >= 2) {
             document.getElementById('stat-today').textContent = listResultDate[0]?.count || 0;
             document.getElementById('stat-yesterday').textContent = listResultDate[1]?.count || 0;
         }
-        if (listHitoryMonth?.length >= 2) {
+        if (listHitoryMonth.length >= 2) {
             document.getElementById('stat-month').textContent = listHitoryMonth[0]?.count || 0;
             document.getElementById('stat-lastmonth').textContent = listHitoryMonth[1]?.count || 0;
         }
@@ -204,90 +226,103 @@
         const dailyLabels = listResultDate.map(item => `${item.day}/${item.month}`);
         const dailyData = listResultDate.map(item => item.count);
         
-        new Chart(document.getElementById('dailyChart'), {
+        new Chart(document.getElementById('dailyChart').getContext('2d'), {
             type: 'bar',
             data: {
                 labels: dailyLabels,
                 datasets: [{
+                    label: 'Lượt truy cập',
                     data: dailyData,
                     backgroundColor: chartColors.blue,
-                    borderRadius: 8,
-                    borderSkipped: false
+                    borderRadius: 4
                 }]
             },
-            options: chartDefaults
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                legend: { display: false },
+                scales: {
+                    yAxes: [{
+                        ticks: { beginAtZero: true },
+                        gridLines: { color: 'rgba(0, 0, 0, 0.05)' }
+                    }],
+                    xAxes: [{
+                        gridLines: { display: false }
+                    }]
+                }
+            }
         });
 
         // Monthly Chart
         const monthlyLabels = listHitoryMonth.map(item => `${item.month}/${item.year}`);
         const monthlyData = listHitoryMonth.map(item => item.count);
         
-        new Chart(document.getElementById('monthlyChart'), {
+        new Chart(document.getElementById('monthlyChart').getContext('2d'), {
             type: 'bar',
             data: {
                 labels: monthlyLabels,
                 datasets: [{
+                    label: 'Lượt truy cập',
                     data: monthlyData,
-                    backgroundColor: chartColors.purple,
-                    borderRadius: 8,
-                    borderSkipped: false
+                    backgroundColor: chartColors.purple
                 }]
             },
-            options: chartDefaults
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                legend: { display: false },
+                scales: {
+                    yAxes: [{
+                        ticks: { beginAtZero: true },
+                        gridLines: { color: 'rgba(0, 0, 0, 0.05)' }
+                    }],
+                    xAxes: [{
+                        gridLines: { display: false }
+                    }]
+                }
+            }
         });
 
         // Day Compare Pie Chart
-        new Chart(document.getElementById('dayCompareChart'), {
+        new Chart(document.getElementById('dayCompareChart').getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: ['Hôm nay', 'Hôm qua'],
                 datasets: [{
                     data: [listResultDate[0]?.count || 0, listResultDate[1]?.count || 0],
                     backgroundColor: [chartColors.blue, chartColors.gray],
-                    borderWidth: 0,
-                    cutout: '70%'
+                    borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: {
-                                family: '-apple-system, BlinkMacSystemFont, sans-serif'
-                            }
-                        }
-                    }
+                maintainAspectRatio: true,
+                cutoutPercentage: 70,
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 20 }
                 }
             }
         });
 
         // Month Compare Pie Chart
-        new Chart(document.getElementById('monthCompareChart'), {
+        new Chart(document.getElementById('monthCompareChart').getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: ['Tháng này', 'Tháng trước'],
                 datasets: [{
                     data: [listHitoryMonth[0]?.count || 0, listHitoryMonth[1]?.count || 0],
                     backgroundColor: [chartColors.purple, chartColors.gray],
-                    borderWidth: 0,
-                    cutout: '70%'
+                    borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: {
-                                family: '-apple-system, BlinkMacSystemFont, sans-serif'
-                            }
-                        }
-                    }
+                maintainAspectRatio: true,
+                cutoutPercentage: 70,
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 20 }
                 }
             }
         });
